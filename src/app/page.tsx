@@ -3,6 +3,7 @@ import burgerImage from "../burger.png";
 import kebabImage from "../kebab.png";
 import logoImage from "../logo.png";
 import nuggetsImage from "../nuggets.png";
+import ScrollAnimations from "./ScrollAnimations";
 import styles from "./page.module.css";
 
 const menuItems = [
@@ -82,8 +83,9 @@ function FoodArtwork({ type }: { type: string }) {
 export default function Home() {
   return (
     <main className={styles.page}>
+      <ScrollAnimations />
       <section className={styles.hero} id="acasa">
-        <nav className={styles.nav} aria-label="Navigare principală">
+        <nav className={styles.nav} aria-label="Navigare principală" data-reveal="down">
           <a className={styles.brand} href="#acasa" aria-label="Daily Kebab Burger - Acasă">
             <Image className={styles.logoImage} src={logoImage} alt="Daily Kebab Burger" priority />
           </a>
@@ -97,7 +99,7 @@ export default function Home() {
         </nav>
 
         <div className={styles.heroGrid}>
-          <div className={styles.heroCopy}>
+          <div className={styles.heroCopy} data-reveal="left">
             <div className={styles.eyebrow}><span /> BURGERI. KEBAB. FOC ADEVĂRAT.</div>
             <h1>GUST MARE.<br /><em>POFTĂ ȘI MAI MARE.</em></h1>
             <p>Burgeri generoși, kebab rumenit la flacără și sosuri pregătite în casă. Fără scurtături. Doar mâncare bună, făcută proaspăt.</p>
@@ -107,12 +109,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className={styles.heroVisual}>
+          <div className={styles.heroVisual} data-reveal="scale" data-reveal-delay="1">
             <div className={styles.sunburst} />
             <div className={styles.heroFood}>
               <Image src={burgerImage} alt="Burger Daily cu vită, cheddar și legume proaspete" priority />
             </div>
-            <div className={styles.kebabCard}><FoodArtwork type="kebab" /></div>
             <div className={`${styles.doodle} ${styles.doodleOne}`}>SUPER<br />GUST!</div>
             <div className={`${styles.doodle} ${styles.doodleTwo}`}>100%<br />PROASPĂT</div>
           </div>
@@ -123,7 +124,7 @@ export default function Home() {
       </section>
 
       <section className={styles.menuSection} id="favorite">
-        <div className={styles.sectionIntro}>
+        <div className={styles.sectionIntro} data-reveal="up">
           <div>
             <span className={styles.kicker}>PREFERATELE CLIENȚILOR</span>
             <h2>ALEGE-ȚI<br /><em>FAVORITUL.</em></h2>
@@ -132,8 +133,8 @@ export default function Home() {
         </div>
 
         <div className={styles.menuGrid}>
-          {menuItems.map((item) => (
-            <article className={styles.menuCard} key={item.name}>
+          {menuItems.map((item, index) => (
+            <article className={styles.menuCard} key={item.name} data-reveal="up" data-reveal-delay={String(index + 1)}>
               <div className={`${styles.cardVisual} ${styles[item.color]}`}>
                 <span>{item.tag}</span>
                 <FoodArtwork type={item.type} />
@@ -150,12 +151,12 @@ export default function Home() {
       </section>
 
       <section className={styles.storySection} id="poveste">
-        <div className={styles.storyVisual}>
+        <div className={styles.storyVisual} data-reveal="left">
           <div className={styles.grillLines} />
           <div className={styles.fireBadge}><FlameIcon /><b>FOCUL<br />ÎNTÂI</b></div>
           <FoodArtwork type="kebab" />
         </div>
-        <div className={styles.storyCopy}>
+        <div className={styles.storyCopy} data-reveal="right" data-reveal-delay="1">
           <span className={styles.kicker}>GUSTUL DAILY</span>
           <h2>ÎNCEPE CU<br /><em>FOC ADEVĂRAT.</em></h2>
           <p>Ingrediente proaspete, carne marinată cu răbdare și jar încins. Atât ne trebuie pentru un gust pe care îl recunoști de la prima îmbucătură.</p>
@@ -168,7 +169,7 @@ export default function Home() {
       </section>
 
       <section className={styles.reviewsSection} id="recenzii">
-        <div className={styles.reviewsHeading}>
+        <div className={styles.reviewsHeading} data-reveal="left">
           <span className={styles.kicker}>DIRECT DE LA MASĂ</span>
           <h2>LUMEA E<br /><em>ÎNCÂNTATĂ.</em></h2>
           <div className={styles.rating}><strong>4.9</strong><span className={styles.stars}>★★★★★</span><small>Din peste 1.200 de recenzii</small></div>
@@ -179,7 +180,7 @@ export default function Home() {
         </div>
         <div className={styles.reviewGrid}>
           {reviews.slice(1).map((review, index) => (
-            <blockquote key={review.name} className={index === 0 ? styles.featuredReview : ""}>
+            <blockquote key={review.name} className={index === 0 ? styles.featuredReview : ""} data-reveal="right" data-reveal-delay={String(index + 1)}>
               <span className={styles.quoteMark}>“</span><p>{review.quote}</p>
               <footer><b>{review.name}</b><small>{review.order}</small></footer>
             </blockquote>
@@ -188,7 +189,7 @@ export default function Home() {
       </section>
 
       <section className={styles.visitSection} id="locatie">
-        <div className={styles.visitCopy}>
+        <div className={styles.visitCopy} data-reveal="left">
           <span className={styles.kicker}>VINO CU POFTĂ</span>
           <h2>MASA TA<br /><em>TE AȘTEAPTĂ.</em></h2>
           <p>Treci pe la noi, ia loc sau comandă din timp și sari peste așteptare.</p>
@@ -201,7 +202,7 @@ export default function Home() {
             <a href="mailto:contact@dailykebab.ro">Vezi locația</a>
           </div>
         </div>
-        <div className={styles.visitArt}>
+        <div className={styles.visitArt} data-reveal="scale" data-reveal-delay="1">
           <div className={styles.takeawayBag}>
             <Image className={styles.bagLogo} src={logoImage} alt="Daily Kebab Burger" />
             <small>MÂNCARE BUNĂ.<br />STARE BUNĂ.</small>
@@ -211,19 +212,19 @@ export default function Home() {
       </section>
 
       <section className={styles.faqSection}>
-        <div>
+        <div data-reveal="left">
           <span className={styles.kicker}>PE SCURT</span>
           <h2>ÎNTREBĂRI?<br /><em>REZOLVAT.</em></h2>
         </div>
         <div className={styles.faqList}>
-          <details><summary>Aveți opțiuni vegetariene?<span>+</span></summary><p>Desigur. Încearcă Halloumi Crocant, legumele la grătar, cartofii cu topping și salatele proaspete.</p></details>
-          <details><summary>Pot comanda pentru ridicare?<span>+</span></summary><p>Da. Sună-ne, comandă din timp, iar noi vom avea totul fierbinte și pregătit când ajungi.</p></details>
-          <details><summary>Carnea este halal?<span>+</span></summary><p>Carnea de pui și miel provine de la furnizori certificați halal. Întreabă echipa noastră pentru detalii.</p></details>
-          <details><summary>Pregătiți comenzi pentru grupuri?<span>+</span></summary><p>Da. Pentru grupuri de minimum opt persoane, contactează-ne din timp și te ajutăm cu meniul potrivit.</p></details>
+          <details data-reveal="right"><summary>Aveți opțiuni vegetariene?<span>+</span></summary><p>Desigur. Încearcă Halloumi Crocant, legumele la grătar, cartofii cu topping și salatele proaspete.</p></details>
+          <details data-reveal="right" data-reveal-delay="1"><summary>Pot comanda pentru ridicare?<span>+</span></summary><p>Da. Sună-ne, comandă din timp, iar noi vom avea totul fierbinte și pregătit când ajungi.</p></details>
+          <details data-reveal="right" data-reveal-delay="2"><summary>Carnea este halal?<span>+</span></summary><p>Carnea de pui și miel provine de la furnizori certificați halal. Întreabă echipa noastră pentru detalii.</p></details>
+          <details data-reveal="right" data-reveal-delay="3"><summary>Pregătiți comenzi pentru grupuri?<span>+</span></summary><p>Da. Pentru grupuri de minimum opt persoane, contactează-ne din timp și te ajutăm cu meniul potrivit.</p></details>
         </div>
       </section>
 
-      <footer className={styles.footer}>
+      <footer className={styles.footer} data-reveal="up">
         <a className={styles.brand} href="#acasa"><Image className={styles.logoImage} src={logoImage} alt="Daily Kebab Burger" /></a>
         <p>BURGERI &amp; KEBAB, FĂCUȚI ALTFEL.</p>
         <div><a href="/menu">Meniu</a><a href="#poveste">Poveste</a><a href="#locatie">Contact</a></div>

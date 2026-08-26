@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import logoImage from "../../logo.png";
+import ScrollAnimations from "../ScrollAnimations";
 import styles from "./menu.module.css";
 
 export const metadata: Metadata = {
@@ -103,7 +104,8 @@ function ArrowIcon() {
 export default function MenuPage() {
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
+      <ScrollAnimations />
+      <header className={styles.header} data-reveal="down">
         <Link className={styles.logo} href="/" aria-label="Daily Kebab Burger - Acasă">
           <Image src={logoImage} alt="Daily Kebab Burger" priority />
         </Link>
@@ -116,10 +118,10 @@ export default function MenuPage() {
       </header>
 
       <section className={styles.hero}>
-        <span className={styles.kicker}>TOT CE-ȚI FACE POFTĂ</span>
-        <h1>MENIUL<br /><em>DAILY.</em></h1>
-        <p>De la kebab rumenit la jar și burgeri generoși până la salate proaspete. Alege categoria și găsește-ți favoritul.</p>
-        <div className={styles.heroStamp}><b>7</b><span>CATEGORII<br />PENTRU ORICE POFTĂ</span></div>
+        <span className={styles.kicker} data-reveal="left">TOT CE-ȚI FACE POFTĂ</span>
+        <h1 data-reveal="left" data-reveal-delay="1">MENIUL<br /><em>DAILY.</em></h1>
+        <p data-reveal="up" data-reveal-delay="2">De la kebab rumenit la jar și burgeri generoși până la salate proaspete. Alege categoria și găsește-ți favoritul.</p>
+        <div className={styles.heroStamp} data-reveal="scale" data-reveal-delay="3"><b>7</b><span>CATEGORII<br />PENTRU ORICE POFTĂ</span></div>
       </section>
 
       <nav className={styles.categoryNav} id="categorii" aria-label="Categorii meniu">
@@ -129,13 +131,13 @@ export default function MenuPage() {
       <div className={styles.menuContent}>
         {categories.map((category, categoryIndex) => (
           <section className={styles.category} id={category.id} key={category.id}>
-            <div className={styles.categoryHeading}>
+            <div className={styles.categoryHeading} data-reveal="left">
               <span>{category.number}</span>
               <div><h2>{category.name}</h2><p>{category.note}</p></div>
             </div>
             <div className={styles.itemsGrid}>
-              {category.items.map((item) => (
-                <article className={styles.item} key={item.name}>
+              {category.items.map((item, itemIndex) => (
+                <article className={styles.item} key={item.name} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
                   <div className={styles.itemTop}>
                     <h3>{item.name}</h3>
                     {item.tag && <span>{item.tag}</span>}
@@ -145,7 +147,7 @@ export default function MenuPage() {
                 </article>
               ))}
               {categoryIndex === 1 && (
-                <aside className={styles.promoCard}>
+                <aside className={styles.promoCard} data-reveal="scale" data-reveal-delay="2">
                   <span>EXTRA POFTĂ?</span>
                   <b>FĂ-L DUBLU.</b>
                   <p>Adaugă încă o porție de carne la orice burger pentru doar 10 lei.</p>
@@ -157,15 +159,15 @@ export default function MenuPage() {
       </div>
 
       <section className={styles.orderSection} id="contact">
-        <div><span className={styles.kicker}>GATA DE COMANDĂ?</span><h2>SUNĂ. ALEGE.<br /><em>BUCURĂ-TE.</em></h2></div>
-        <div className={styles.orderDetails}>
+        <div data-reveal="left"><span className={styles.kicker}>GATA DE COMANDĂ?</span><h2>SUNĂ. ALEGE.<br /><em>BUCURĂ-TE.</em></h2></div>
+        <div className={styles.orderDetails} data-reveal="right" data-reveal-delay="1">
           <p>Comandă pentru ridicare, iar noi pregătim totul proaspăt și fierbinte.</p>
           <a href="tel:+37379199299">+373 79 199 299 <ArrowIcon /></a>
           <small>Luni–Duminică · 11:00–23:00</small>
         </div>
       </section>
 
-      <footer className={styles.footer}>
+      <footer className={styles.footer} data-reveal="up">
         <Link href="/"><Image src={logoImage} alt="Daily Kebab Burger" /></Link>
         <p>BURGERI &amp; KEBAB, FĂCUȚI ALTFEL.</p>
         <Link href="/">Înapoi la pagina principală</Link>
