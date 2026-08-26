@@ -112,7 +112,7 @@ export default function MenuPage() {
           <a href="#categorii">Categorii</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className={styles.orderButton} href="tel:+40123456789">Comandă <ArrowIcon /></a>
+        <a className={styles.orderButton} href="tel:+37379199299">Comandă <ArrowIcon /></a>
       </header>
 
       <section className={styles.hero}>
@@ -160,7 +160,7 @@ export default function MenuPage() {
         <div><span className={styles.kicker}>GATA DE COMANDĂ?</span><h2>SUNĂ. ALEGE.<br /><em>BUCURĂ-TE.</em></h2></div>
         <div className={styles.orderDetails}>
           <p>Comandă pentru ridicare, iar noi pregătim totul proaspăt și fierbinte.</p>
-          <a href="tel:+40123456789">0123 456 789 <ArrowIcon /></a>
+          <a href="tel:+37379199299">+373 79 199 299 <ArrowIcon /></a>
           <small>Luni–Duminică · 11:00–23:00</small>
         </div>
       </section>

@@ -193,11 +193,11 @@ export default function Home() {
           <h2>MASA TA<br /><em>TE AȘTEAPTĂ.</em></h2>
           <p>Treci pe la noi, ia loc sau comandă din timp și sari peste așteptare.</p>
           <div className={styles.visitDetails}>
-            <div><small>NE GĂSEȘTI</small><b>Strada Pieței 28<br />Centru</b></div>
+            <div><small>NE GĂSEȘTI</small><b>str. Independentei 50B</b></div>
             <div><small>PROGRAM</small><b>Luni–Duminică<br />11:00–23:00</b></div>
           </div>
           <div className={styles.visitActions}>
-            <a className={styles.darkCta} href="tel:+40123456789">Sună și comandă <ArrowIcon /></a>
+            <a className={styles.darkCta} href="tel:+37379199299">Sună și comandă <ArrowIcon /></a>
             <a href="mailto:contact@dailykebab.ro">Vezi locația</a>
           </div>
         </div>
