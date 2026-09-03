@@ -148,6 +148,7 @@
 }
 
 @media (max-width: 680px) {
+  .categorySheet { max-height: calc(100dvh - 66px); overflow-y: auto; }
   .languageSwitch { gap: 3px; padding: 4px 6px; font-size: 9px; }
   .orderBar { height: 66px; }
   .orderCategories { display: none; }

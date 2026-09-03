@@ -152,6 +152,9 @@
   .intro h1 { font-size: 49px; }
   .formPanel, .summaryPanel { padding: 23px 18px; }
   .formPanel h2, .summaryPanel h2 { font-size: 21px; }
+  .choiceGroup label > span { align-items: flex-start; }
+  .choiceGroup label > span b { overflow-wrap: anywhere; }
+  .paymentGroup { display: grid; grid-template-columns: 1fr; }
   .fields { grid-template-columns: 1fr; }
   .fullField { grid-column: auto; }
   .orderItem { grid-template-columns: 1fr auto; }
