@@ -36,27 +36,27 @@ const content = {
 
 const menuItems = {
   ro: [
-    { tag: "CEL MAI VÂNDUT", name: "Burger Daily", description: "Vită fragedă, cheddar topit, ceapă crocantă, castraveți murați și sosul casei.", price: "89 lei", type: "burger", color: "orange" },
-    { tag: "LA JAR", name: "Kebab Adana", description: "Carne condimentată, ardei copți, ceapă cu sumac, verdeață și lipie caldă.", price: "85 lei", type: "kebab", color: "red" },
-    { tag: "SUPER CROCANT", name: "Nuggets Daily", description: "Bucăți fragede de pui în crustă aurie, servite cu sosul Daily la alegere.", price: "82 lei", type: "nuggets", color: "green" },
+    { tag: "CEL MAI VÂNDUT", name: "Big Daily Burger 340g", description: "Dublu carne de porc, dublu bacon, dublu cașcaval și sos BBQ.", price: "95 MDL", type: "burger", color: "orange" },
+    { tag: "POPULAR", name: "Kebab de Pui 400g", description: "Lavaș, carne de pui, cartofi pai, varză, castraveți murați, roșii și sos.", price: "80 MDL", type: "kebab", color: "red" },
+    { tag: "SUPER CROCANT", name: "Nuggets de Pui 220g", description: "Nuggets de pui crocanți, serviți cu sos la alegere.", price: "75 MDL", type: "nuggets", color: "green" },
   ],
   ru: [
-    { tag: "ХИТ ПРОДАЖ", name: "Бургер Daily", description: "Нежная говядина, расплавленный чеддер, хрустящий лук, маринованные огурцы и фирменный соус.", price: "89 леев", type: "burger", color: "orange" },
-    { tag: "НА УГЛЯХ", name: "Кебаб Адана", description: "Пряное мясо, запечённый перец, лук с сумахом, зелень и тёплая лепёшка.", price: "85 леев", type: "kebab", color: "red" },
-    { tag: "СУПЕРХРУСТЯЩИЕ", name: "Наггетсы Daily", description: "Нежные кусочки курицы в золотистой корочке с соусом Daily на выбор.", price: "82 лея", type: "nuggets", color: "green" },
+    { tag: "ХИТ ПРОДАЖ", name: "Big Daily Burger 340 г", description: "Двойная порция свинины, двойной бекон, двойной сыр и соус BBQ.", price: "95 MDL", type: "burger", color: "orange" },
+    { tag: "ПОПУЛЯРНОЕ", name: "Кебаб с курицей 400 г", description: "Лаваш, куриное мясо, картофель фри, капуста, маринованные огурцы, помидоры и соус.", price: "80 MDL", type: "kebab", color: "red" },
+    { tag: "СУПЕРХРУСТЯЩИЕ", name: "Куриные наггетсы 220 г", description: "Хрустящие куриные наггетсы с соусом на выбор.", price: "75 MDL", type: "nuggets", color: "green" },
   ],
 };
 
 const reviews = {
   ro: [
-    { quote: "Burgerul a avut marginile perfect rumenite, iar kebabul avea gustul acela autentic de grătar cu cărbuni.", name: "Maria R.", order: "Burger Daily + Adana" },
+    { quote: "Burgerul a avut marginile perfect rumenite, iar kebabul avea gustul acela autentic de grătar cu cărbuni.", name: "Maria R.", order: "Big Daily Burger + Kebab de Pui" },
     { quote: "Fierbinte, rapid și delicios. Sosul Daily merită propriul lui fan club.", name: "Ion Pop", order: "Client fidel din 2022" },
-    { quote: "Nuggets crocanți la exterior și fragezi în interior. Au dispărut de pe masă în câteva minute.", name: "Teodora A.", order: "Nuggets Daily" },
+    { quote: "Nuggets crocanți la exterior și fragezi în interior. Au dispărut de pe masă în câteva minute.", name: "Teodora A.", order: "Nuggets de Pui" },
   ],
   ru: [
-    { quote: "У бургера была идеальная поджаристая корочка, а кебаб пах настоящим грилем на углях.", name: "Мария Р.", order: "Бургер Daily + Адана" },
+    { quote: "У бургера была идеальная поджаристая корочка, а кебаб пах настоящим грилем на углях.", name: "Мария Р.", order: "Big Daily Burger + кебаб с курицей" },
     { quote: "Горячо, быстро и очень вкусно. Соус Daily достоин собственного фан-клуба.", name: "Ион Поп", order: "Постоянный гость с 2022 года" },
-    { quote: "Наггетсы хрустящие снаружи и нежные внутри. Со стола исчезли за несколько минут.", name: "Теодора А.", order: "Наггетсы Daily" },
+    { quote: "Наггетсы хрустящие снаружи и нежные внутри. Со стола исчезли за несколько минут.", name: "Теодора А.", order: "Куриные наггетсы" },
   ],
 };
 
