@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import CartProvider from "./CartProvider";
+import FloatingPhone from "./FloatingPhone";
+import LanguageProvider from "./LanguageProvider";
+import QuickOrderBar from "./QuickOrderBar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,7 +24,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ro" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          <CartProvider>
+            {children}
+            <FloatingPhone />
+            <QuickOrderBar />
+          </CartProvider>
+        </LanguageProvider>
+      </body>
     </html>
   );
 }

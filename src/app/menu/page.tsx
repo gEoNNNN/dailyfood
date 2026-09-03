@@ -1,178 +1,71 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import logoImage from "../../logo.png";
+import { useCart } from "../CartProvider";
+import LanguageSwitch from "../LanguageSwitch";
 import ScrollAnimations from "../ScrollAnimations";
+import { useLanguage } from "../LanguageProvider";
+import { menuCategories, type Language } from "./menuData";
 import styles from "./menu.module.css";
 
-export const metadata: Metadata = {
-  title: "Meniu | Daily Kebab Burger",
-  description: "Descoperă meniul Daily: kebab, burgeri, meniuri complete, croki, salate și băuturi răcoritoare.",
-};
-
-const categories = [
-  {
-    id: "kebab",
-    number: "01",
-    name: "Kebab",
-    note: "Lipie caldă, carne rumenită și sosuri de casă.",
-    items: [
-      { name: "Kebab Pui", description: "Pui, cartofi, salată, roșii, ceapă și două sosuri la alegere", price: "28 lei", tag: "Popular" },
-      { name: "Kebab Vită", description: "Vită, cartofi, salată crocantă, castraveți murați și sos Daily", price: "31 lei" },
-      { name: "Kebab Mixt", description: "Pui și vită, cartofi, legume proaspete și două sosuri", price: "32 lei" },
-      { name: "Kebab Halloumi", description: "Halloumi la grătar, cartofi, salată, roșii și sos verde", price: "30 lei", tag: "Veggie" },
-    ],
-  },
-  {
-    id: "burger",
-    number: "02",
-    name: "Burger",
-    note: "Chifle rumenite și burgeri făcuți la comandă.",
-    items: [
-      { name: "Daily Burger", description: "Vită, cheddar, salată, roșii, ceapă, castraveți și sos Daily", price: "32 lei", tag: "Semnătura casei" },
-      { name: "Double Trouble", description: "Dublă vită, dublu cheddar, ceapă caramelizată, castraveți și sos afumat", price: "42 lei" },
-      { name: "Crispy Chicken", description: "Pui crocant, cheddar, salată coleslaw, castraveți și sos picant", price: "31 lei" },
-      { name: "Halloumi Burger", description: "Halloumi, ardei copt, rucola, roșii și sos verde cu tahini", price: "30 lei", tag: "Veggie" },
-    ],
-  },
-  {
-    id: "kebab-menu",
-    number: "03",
-    name: "Kebab Menu",
-    note: "Kebabul preferat, cartofi și o băutură rece.",
-    items: [
-      { name: "Meniu Kebab Pui", description: "Kebab pui + cartofi prăjiți + băutură 330 ml", price: "39 lei", tag: "Avantajos" },
-      { name: "Meniu Kebab Vită", description: "Kebab vită + cartofi prăjiți + băutură 330 ml", price: "42 lei" },
-      { name: "Meniu Kebab Mixt", description: "Kebab mixt + cartofi prăjiți + băutură 330 ml", price: "43 lei" },
-    ],
-  },
-  {
-    id: "burger-menu",
-    number: "04",
-    name: "Burger Menu",
-    note: "Burger, cartofi crocanți și băutură la alegere.",
-    items: [
-      { name: "Meniu Daily Burger", description: "Daily Burger + cartofi prăjiți + băutură 330 ml", price: "43 lei", tag: "Cel mai vândut" },
-      { name: "Meniu Double Trouble", description: "Double Trouble + cartofi prăjiți + băutură 330 ml", price: "53 lei" },
-      { name: "Meniu Crispy Chicken", description: "Crispy Chicken + cartofi prăjiți + băutură 330 ml", price: "42 lei" },
-    ],
-  },
-  {
-    id: "croki-menu",
-    number: "05",
-    name: "Croki Menu",
-    note: "Crocant pe dinafară, delicios până la ultima îmbucătură.",
-    items: [
-      { name: "Croki Pui", description: "Fâșii de pui crocant, cartofi, sos de usturoi și băutură 330 ml", price: "38 lei", tag: "Crocant" },
-      { name: "Croki Cașcaval", description: "Cașcaval pane, cartofi, sos Daily și băutură 330 ml", price: "36 lei" },
-      { name: "Croki Mix", description: "Pui crocant, cașcaval pane, cartofi, două sosuri și băutură", price: "45 lei" },
-    ],
-  },
-  {
-    id: "salate",
-    number: "06",
-    name: "Salate",
-    note: "Proaspete, colorate și suficient de consistente.",
-    items: [
-      { name: "Salată Daily", description: "Mix verde, pui la grătar, roșii, castravete, porumb și dressing de iaurt", price: "29 lei", tag: "Fresh" },
-      { name: "Salată Halloumi", description: "Halloumi, rucola, roșii cherry, ardei copt, măsline și dressing de lămâie", price: "31 lei" },
-      { name: "Salată Coleslaw", description: "Varză albă și roșie, morcov și dressing cremos de casă", price: "12 lei" },
-    ],
-  },
-  {
-    id: "bauturi",
-    number: "07",
-    name: "Băuturi Răcoritoare",
-    note: "Reci, exact cum trebuie lângă ceva fierbinte.",
-    items: [
-      { name: "Băutură carbogazoasă", description: "Cola, portocale, lămâie-lime sau tonic — 330 ml", price: "9 lei" },
-      { name: "Limonadă de casă", description: "Lămâie proaspătă, mentă și sirop de zahăr — 400 ml", price: "14 lei", tag: "De casă" },
-      { name: "Apă plată / minerală", description: "Apă rece — 500 ml", price: "7 lei" },
-      { name: "Ayran", description: "Băutură rece pe bază de iaurt — 330 ml", price: "10 lei" },
-    ],
-  },
-];
+const text = {
+  ro: { backgroundLabel: "MENIU", homeLabel: "Daily Kebab Burger - Acasă", navLabel: "Navigare meniu", home: "Acasă", categories: "Categorii", delivery: "Livrare", contact: "Contact", order: "Comandă", kicker: "TOT CE-ȚI FACE POFTĂ", title: <>MENIUL<br /><em>DAILY.</em></>, intro: "De la kebab rumenit și burgeri generoși până la gustări și salate proaspete. Alege categoria și găsește-ți favoritul.", stamp: <>CATEGORII<br />PENTRU ORICE POFTĂ</>, promoKicker: "EXTRA POFTĂ?", promoTitle: "FĂ-L DUBLU.", promoText: "Adaugă încă o porție de carne la orice burger pentru doar 10 MDL.", orderKicker: "GATA DE COMANDĂ?", orderTitle: <>SUNĂ. ALEGE.<br /><em>BUCURĂ-TE.</em></>, orderText: "Comandă pentru ridicare, iar noi pregătim totul proaspăt și fierbinte.", days: "Luni–Duminică · 11:00–23:00", footer: "BURGERI & KEBAB, FĂCUȚI ALTFEL.", back: "Înapoi la pagina principală", addToCart: "Adaugă în coș", added: "Adăugat", productPhoto: "fotografie produs", noPhoto: "Băutură rece" },
+  ru: { backgroundLabel: "МЕНЮ", homeLabel: "Daily Kebab Burger — Главная", navLabel: "Навигация по меню", home: "Главная", categories: "Категории", delivery: "Доставка", contact: "Контакты", order: "Заказать", kicker: "ВСЁ, ЧТО ПРОБУЖДАЕТ АППЕТИТ", title: <>МЕНЮ<br /><em>DAILY.</em></>, intro: "От кебабов и сытных бургеров до закусок и свежих салатов. Выберите категорию и найдите своё любимое блюдо.", stamp: <>КАТЕГОРИЙ<br />НА ЛЮБОЙ ВКУС</>, promoKicker: "ХОЧЕТСЯ БОЛЬШЕ?", promoTitle: "СДЕЛАЙ ДВОЙНЫМ.", promoText: "Добавьте ещё одну порцию мяса в любой бургер всего за 10 MDL.", orderKicker: "ГОТОВЫ ЗАКАЗАТЬ?", orderTitle: <>ЗВОНИТЕ. ВЫБИРАЙТЕ.<br /><em>НАСЛАЖДАЙТЕСЬ.</em></>, orderText: "Закажите навынос, а мы приготовим всё свежим и горячим.", days: "Понедельник–Воскресенье · 11:00–23:00", footer: "БУРГЕРЫ И КЕБАБ — ПО-НАШЕМУ.", back: "Вернуться на главную", addToCart: "Добавить в корзину", added: "Добавлено", productPhoto: "фотография блюда", noPhoto: "Холодный напиток" },
+} satisfies Record<Language, Record<string, React.ReactNode>>;
 
 function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden="true">
-      <path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+  return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
 export default function MenuPage() {
+  const { language } = useLanguage();
+  const { items: cartItems, add } = useCart();
+  const currentLanguage: Language = language;
+  const t = text[currentLanguage];
+
   return (
     <main className={styles.page}>
       <ScrollAnimations />
       <header className={styles.header} data-reveal="down">
-        <Link className={styles.logo} href="/" aria-label="Daily Kebab Burger - Acasă">
-          <Image src={logoImage} alt="Daily Kebab Burger" priority />
-        </Link>
-        <nav aria-label="Navigare meniu">
-          <Link href="/">Acasă</Link>
-          <a href="#categorii">Categorii</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a className={styles.orderButton} href="tel:+37379199299">Comandă <ArrowIcon /></a>
+        <Link className={styles.logo} href="/" aria-label={String(t.homeLabel)}><Image src={logoImage} alt="Daily Kebab Burger" priority /></Link>
+        <nav aria-label={String(t.navLabel)}><Link href="/">{t.home}</Link><a href="#categorii">{t.categories}</a><Link href="/delivery">{t.delivery}</Link><a href="#contact">{t.contact}</a></nav>
+        <div className={styles.headerActions}><LanguageSwitch /><a className={styles.orderButton} href="tel:+37379199299">{t.order} <ArrowIcon /></a></div>
       </header>
 
-      <section className={styles.hero}>
-        <span className={styles.kicker} data-reveal="left">TOT CE-ȚI FACE POFTĂ</span>
-        <h1 data-reveal="left" data-reveal-delay="1">MENIUL<br /><em>DAILY.</em></h1>
-        <p data-reveal="up" data-reveal-delay="2">De la kebab rumenit la jar și burgeri generoși până la salate proaspete. Alege categoria și găsește-ți favoritul.</p>
-        <div className={styles.heroStamp} data-reveal="scale" data-reveal-delay="3"><b>7</b><span>CATEGORII<br />PENTRU ORICE POFTĂ</span></div>
-      </section>
+      <section className={styles.hero} data-label={t.backgroundLabel}><span className={styles.kicker} data-reveal="left">{t.kicker}</span><h1 data-reveal="left" data-reveal-delay="1">{t.title}</h1><p data-reveal="up" data-reveal-delay="2">{t.intro}</p><div className={styles.heroStamp} data-reveal="scale" data-reveal-delay="3"><b>7</b><span>{t.stamp}</span></div></section>
 
-      <nav className={styles.categoryNav} id="categorii" aria-label="Categorii meniu">
-        {categories.map((category) => <a key={category.id} href={`#${category.id}`}>{category.name}</a>)}
-      </nav>
-
-      <div className={styles.menuContent}>
-        {categories.map((category, categoryIndex) => (
+      <div className={styles.menuContent} id="categorii">
+        {menuCategories.map((category, categoryIndex) => (
           <section className={styles.category} id={category.id} key={category.id}>
-            <div className={styles.categoryHeading} data-reveal="left">
-              <span>{category.number}</span>
-              <div><h2>{category.name}</h2><p>{category.note}</p></div>
-            </div>
+            <div className={styles.categoryHeading} data-reveal="left"><span>{category.number}</span><div><h2>{category.name[currentLanguage]}</h2><p>{category.note[currentLanguage]}</p></div></div>
             <div className={styles.itemsGrid}>
-              {category.items.map((item, itemIndex) => (
-                <article className={styles.item} key={item.name} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
-                  <div className={styles.itemTop}>
-                    <h3>{item.name}</h3>
-                    {item.tag && <span>{item.tag}</span>}
-                  </div>
-                  <p>{item.description}</p>
-                  <strong>{item.price}</strong>
-                </article>
-              ))}
-              {categoryIndex === 1 && (
-                <aside className={styles.promoCard} data-reveal="scale" data-reveal-delay="2">
-                  <span>EXTRA POFTĂ?</span>
-                  <b>FĂ-L DUBLU.</b>
-                  <p>Adaugă încă o porție de carne la orice burger pentru doar 10 lei.</p>
-                </aside>
-              )}
+              {category.items.map((item, itemIndex) => {
+                const quantity = cartItems.find((cartItem) => cartItem.id === item.id)?.quantity ?? 0;
+                const localizedName = item.name[currentLanguage];
+                return (
+                  <article className={styles.item} key={item.id} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
+                    <div className={styles.itemVisual}>
+                      {item.image ? <Image className={item.imageFit === "contain" ? styles.containImage : undefined} src={item.image} alt={`${localizedName} — ${String(t.productPhoto)}`} sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 960px) 50vw, 425px" placeholder="blur" /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
+                      {item.tag && <span className={styles.itemTag}>{item.tag[currentLanguage]}</span>}
+                    </div>
+                    <div className={styles.itemBody}>
+                      <h3>{localizedName}</h3>
+                      <p>{item.description[currentLanguage]}</p>
+                      <div className={styles.itemOrder}><strong>{item.price} MDL</strong><button type="button" onClick={() => add({ id: item.id, nameRo: item.name.ro, nameRu: item.name.ru, price: item.price })}>{quantity ? `${String(t.added)} · ${quantity}` : t.addToCart}</button></div>
+                    </div>
+                  </article>
+                );
+              })}
+              {categoryIndex === 1 && <aside className={styles.promoCard} data-reveal="scale" data-reveal-delay="2"><span>{t.promoKicker}</span><b>{t.promoTitle}</b><p>{t.promoText}</p></aside>}
             </div>
           </section>
         ))}
       </div>
 
-      <section className={styles.orderSection} id="contact">
-        <div data-reveal="left"><span className={styles.kicker}>GATA DE COMANDĂ?</span><h2>SUNĂ. ALEGE.<br /><em>BUCURĂ-TE.</em></h2></div>
-        <div className={styles.orderDetails} data-reveal="right" data-reveal-delay="1">
-          <p>Comandă pentru ridicare, iar noi pregătim totul proaspăt și fierbinte.</p>
-          <a href="tel:+37379199299">+373 79 199 299 <ArrowIcon /></a>
-          <small>Luni–Duminică · 11:00–23:00</small>
-        </div>
-      </section>
-
-      <footer className={styles.footer} data-reveal="up">
-        <Link href="/"><Image src={logoImage} alt="Daily Kebab Burger" /></Link>
-        <p>BURGERI &amp; KEBAB, FĂCUȚI ALTFEL.</p>
-        <Link href="/">Înapoi la pagina principală</Link>
-        <small>© 2026 Daily Kebab Burger</small>
-      </footer>
+      <section className={styles.orderSection} id="contact"><div data-reveal="left"><span className={styles.kicker}>{t.orderKicker}</span><h2>{t.orderTitle}</h2></div><div className={styles.orderDetails} data-reveal="right" data-reveal-delay="1"><p>{t.orderText}</p><a href="tel:+37379199299">+373 79 199 299 <ArrowIcon /></a><small>{t.days}</small></div></section>
+      <footer className={styles.footer} data-reveal="up"><Link href="/"><Image src={logoImage} alt="Daily Kebab Burger" /></Link><p>{t.footer}</p><div><Link href="/delivery">{t.delivery}</Link><Link href="/">{t.back}</Link></div><small>© 2026 Daily Kebab Burger</small></footer>
     </main>
   );
 }

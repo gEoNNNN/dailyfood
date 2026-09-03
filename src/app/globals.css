@@ -16,6 +16,7 @@ body {
 
 body {
   min-height: 100%;
+  padding-bottom: 72px;
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
@@ -43,6 +44,10 @@ a {
 ::selection {
   color: #f5eddb;
   background: #d8492f;
+}
+
+@media (max-width: 680px) {
+  body { padding-bottom: 66px; }
 }
 
 .has-scroll-reveal [data-reveal] {
