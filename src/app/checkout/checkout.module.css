@@ -37,13 +37,21 @@
 
 .choiceGroup, .paymentGroup { border: 0; }
 .choiceGroup legend, .paymentGroup legend { margin-bottom: 12px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
-.choiceGroup { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+.choiceGroup { display: grid; grid-template-columns: 1fr; gap: 9px; margin-bottom: 16px; }
 .choiceGroup legend { grid-column: 1 / -1; }
+.choiceGroup legend b { color: var(--red); }
 .choiceGroup label, .paymentGroup label { position: relative; cursor: pointer; }
 .choiceGroup input, .paymentGroup input { position: absolute; opacity: 0; pointer-events: none; }
-.choiceGroup label > span { display: grid; min-height: 52px; place-items: center; border: 2px solid var(--ink); font-size: 12px; font-weight: 900; text-transform: uppercase; }
+.choiceGroup label > span { display: flex; min-height: 52px; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 14px; border: 2px solid var(--ink); font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.choiceGroup label > span b { max-width: 520px; line-height: 1.35; }
+.choiceGroup label > span strong { flex: 0 0 auto; color: var(--red); font-size: 13px; }
 .choiceGroup .selectedChoice > span { color: var(--cream); background: var(--green); box-shadow: 4px 4px 0 var(--yellow); }
+.choiceGroup .selectedChoice > span strong { color: var(--yellow); }
 .choiceGroup input:focus-visible + span, .paymentGroup input:focus-visible + span { outline: 3px solid var(--red); outline-offset: 3px; }
+.deliveryPolicies { display: grid; gap: 8px; margin-bottom: 14px; padding: 16px 18px; border-left: 5px solid var(--green); background: var(--yellow); }
+.deliveryPolicies strong { font-size: 11px; text-transform: uppercase; line-height: 1.4; }
+.deliveryPolicies p { padding-top: 6px; border-top: 1px solid rgba(31, 33, 25, .35); font-size: 11px; font-weight: 700; line-height: 1.55; }
+.minimumWarning { margin-bottom: 20px; padding: 12px 15px; color: var(--cream); border: 2px solid var(--ink); background: var(--red); font-size: 11px; font-weight: 900; line-height: 1.45; }
 
 .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
 .fields label { display: flex; flex-direction: column; gap: 8px; }
@@ -69,8 +77,11 @@
 .quantity { display: flex; align-items: center; border: 2px solid var(--ink); }
 .quantity button { display: grid; width: 29px; height: 29px; place-items: center; border: 0; background: transparent; font: 18px/1 Arial, sans-serif; cursor: pointer; }
 .quantity span { min-width: 20px; text-align: center; font-size: 11px; font-weight: 900; }
-.total { display: flex; align-items: center; justify-content: space-between; padding: 24px 0; font-size: 12px; font-weight: 900; text-transform: uppercase; }
-.total strong { color: var(--red); font-size: 26px; }
+.totals { padding: 15px 0 22px; }
+.total { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 8px 0; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.total strong { color: var(--red); font-size: 16px; }
+.grandTotal { margin-top: 8px; padding-top: 16px; border-top: 2px solid var(--ink); font-size: 13px; }
+.grandTotal strong { font-size: 26px; }
 .submitButton { display: flex; width: 100%; min-height: 62px; align-items: center; justify-content: space-between; gap: 15px; padding: 0 20px; color: var(--cream); border: 2px solid var(--ink); background: var(--green); box-shadow: 6px 6px 0 var(--yellow); font: inherit; font-size: 12px; font-weight: 950; text-align: left; text-transform: uppercase; letter-spacing: .04em; cursor: pointer; }
 .submitButton span { color: var(--yellow); font-size: 22px; }
 .notice { margin-top: 24px; padding: 20px; border: 2px solid var(--ink); background: var(--yellow); box-shadow: 5px 5px 0 var(--red); }
