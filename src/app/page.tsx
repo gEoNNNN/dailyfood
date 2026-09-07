@@ -62,16 +62,20 @@ const reviews = {
 
 const faqs = {
   ro: [
-    ["Aveți opțiuni vegetariene?", "Desigur. Încearcă Halloumi Crocant, legumele la grătar, cartofii cu topping și salatele proaspete."],
-    ["Pot comanda pentru ridicare?", "Da. Sună-ne, comandă din timp, iar noi vom avea totul fierbinte și pregătit când ajungi."],
-    ["Carnea este halal?", "Carnea de pui și miel provine de la furnizori certificați halal. Întreabă echipa noastră pentru detalii."],
-    ["Pregătiți comenzi pentru grupuri?", "Da. Pentru grupuri de minimum opt persoane, contactează-ne din timp și te ajutăm cu meniul potrivit."],
+    ["Ce găsesc în meniul Daily Kebab?", "Meniul include kebaburi, burgeri, meniuri combo, hot dog, gustări, platouri, salate, sosuri și băuturi. Produsele și prețurile actuale sunt afișate în pagina Meniu."],
+    ["Aveți opțiuni vegetariene sau de post?", "Da. Poți alege Daily Falafel Kebab, Daily Kebab de Post și variantele lor de meniu, precum și Salata Grecească."],
+    ["În ce zone livrați?", "Livrăm în Botanica, Centru și Telecentru, precum și în Codru, Băcioi, Bîc, Sîngera și Bubuieci. Tariful depinde de zona selectată."],
+    ["Care este comanda minimă și când livrarea este gratuită?", "Comanda minimă pentru livrare este de 130 MDL. Livrarea în oraș este gratuită pentru comenzile de minimum 500 MDL, iar ridicarea din local este gratuită."],
+    ["Cum plasez și achit o comandă?", "Adaugă produsele în coș și finalizează comanda online sau sună la +373 79 199 299. Comanda online devine valabilă după confirmarea telefonică și poate fi achitată curierului în numerar sau cu cardul."],
+    ["Care este programul?", "Localul este deschis zilnic între 11:00 și 23:00, iar programul de livrare este 08:00–22:00. Ne găsești pe str. Independenței 50, Chișinău."],
   ],
   ru: [
-    ["Есть ли вегетарианские блюда?", "Конечно. Попробуйте хрустящий халлуми, овощи на гриле, картофель с топпингами и свежие салаты."],
-    ["Можно заказать навынос?", "Да. Позвоните и сделайте заказ заранее — к вашему приезду всё будет горячим и готовым."],
-    ["Мясо халяльное?", "Курицу и баранину поставляют сертифицированные халяль-производители. Подробности уточняйте у нашей команды."],
-    ["Вы готовите заказы для групп?", "Да. Для групп от восьми человек свяжитесь с нами заранее, и мы поможем подобрать подходящее меню."],
+    ["Что есть в меню Daily Kebab?", "В меню представлены кебабы, бургеры, комбо-меню, хот-доги, закуски, большие сеты, салаты, соусы и напитки. Актуальные блюда и цены указаны на странице меню."],
+    ["Есть ли вегетарианские или постные блюда?", "Да. Можно выбрать Daily Falafel Kebab, постный Daily Kebab и наборы с ними, а также греческий салат."],
+    ["В какие районы вы доставляете?", "Мы доставляем на Ботанику, в Центр и Телецентр, а также в Кодру, Бэчой, Бык, Сынжеру и Бубуечь. Стоимость зависит от выбранной зоны."],
+    ["Какая минимальная сумма заказа и когда доставка бесплатная?", "Минимальная сумма заказа для доставки — 130 MDL. Доставка по городу бесплатная при заказе от 500 MDL, самовывоз всегда бесплатный."],
+    ["Как оформить и оплатить заказ?", "Добавьте блюда в корзину и оформите заказ онлайн или позвоните по номеру +373 79 199 299. Онлайн-заказ принимается после подтверждения по телефону. Курьеру можно оплатить наличными или картой."],
+    ["Какой у вас график работы?", "Ресторан открыт ежедневно с 11:00 до 23:00, доставка работает с 08:00 до 22:00. Наш адрес: ул. Индепенденцей, 50, Кишинёв."],
   ],
 };
 

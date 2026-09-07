@@ -47,7 +47,7 @@ export default function MenuPage() {
                 return (
                   <article className={styles.item} key={item.id} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
                     <div className={styles.itemVisual}>
-                      {item.image ? <Image className={item.imageFit === "contain" ? styles.containImage : undefined} src={item.image} alt={`${localizedName} — ${String(t.productPhoto)}`} sizes="(max-width: 640px) calc(100vw - 36px), (max-width: 960px) 50vw, 425px" placeholder="blur" /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
+                      {item.image ? <Image className={item.imageFit === "contain" ? styles.containImage : undefined} src={item.image} alt={`${localizedName} — ${String(t.productPhoto)}`} sizes="(max-width: 640px) calc((100vw - 30px) / 2), (max-width: 960px) 50vw, 425px" placeholder="blur" /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
                       {item.tag && <span className={styles.itemTag}>{item.tag[currentLanguage]}</span>}
                     </div>
                     <div className={styles.itemBody}>
