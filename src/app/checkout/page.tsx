@@ -18,6 +18,11 @@ const text = {
   },
 };
 
+const privacyText = {
+  ro: { notice: "Confirm că am citit", link: "Politica de confidențialitate", footer: "Confidențialitate" },
+  ru: { notice: "Подтверждаю, что ознакомился(-ась) с", link: "Политикой конфиденциальности", footer: "Конфиденциальность" },
+} as const;
+
 const deliveryOptions = {
   ro: [
     { id: "pickup", label: "Ridicarea produsului din local", fee: 0 },
@@ -45,6 +50,7 @@ export default function CheckoutPage() {
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [orderId, setOrderId] = useState("");
   const t = text[language];
+  const privacy = privacyText[language];
   const currentDeliveryOptions = deliveryOptions[language];
   const baseDeliveryFee = deliveryOptions.ro.find((option) => option.id === deliveryOption)?.fee ?? 0;
   const requiresAddress = deliveryOption !== "" && deliveryOption !== "pickup";
@@ -147,6 +153,7 @@ export default function CheckoutPage() {
                 return <article key={item.id} className={styles.orderItem}><div><h3>{name}</h3><button type="button" onClick={() => remove(item.id)}>{t.remove}</button></div><div className={styles.quantity}><button type="button" onClick={() => decrement(item.id)} aria-label={`${t.decrease}: ${name}`}>−</button><span>{item.quantity}</span><button type="button" onClick={() => increment(item.id)} aria-label={`${t.increase}: ${name}`}>+</button></div><strong>{item.price * item.quantity} MDL</strong></article>;
               })}</div>
               <div className={styles.totals}><div className={styles.total}><span>{t.total}</span><strong>{totalPrice} MDL</strong></div><div className={styles.total}><span>{t.deliveryFee}</span><strong>{deliveryFee} MDL</strong></div><div className={`${styles.total} ${styles.grandTotal}`}><span>{t.grandTotal}</span><strong>{totalPrice + deliveryFee} MDL</strong></div></div>
+              <div className={styles.privacyNotice}><input id="privacy-read" name="privacyRead" type="checkbox" required /><label htmlFor="privacy-read">{privacy.notice} <Link href="/privacy" target="_blank">{privacy.link}</Link>.</label></div>
               <button className={styles.submitButton} type="submit" disabled={status === "submitting" || deliveryMinimumMissing > 0}>{status === "submitting" ? t.placing : t.submit}<span>{status === "submitting" ? "···" : "→"}</span></button>
               {status === "error" && <div className={styles.errorNotice} id="order-error" role="alert"><b>{t.errorTitle}</b><p>{t.errorText}</p><div><button type="button" onClick={() => setStatus("idle")}>{t.retry}</button><a href="tel:+37379199299">{t.call}</a></div></div>}
             </aside>
@@ -154,7 +161,7 @@ export default function CheckoutPage() {
         </>
       )}
 
-      <footer className={styles.footer}><span>{t.footer}</span><div><Link href="/delivery">{t.deliveryInfo}</Link><Link href="/menu">{t.browse}</Link></div><small>© 2026 Daily Kebab Burger</small></footer>
+      <footer className={styles.footer}><span>{t.footer}</span><div><Link href="/delivery">{t.deliveryInfo}</Link><Link href="/privacy">{privacy.footer}</Link><Link href="/menu">{t.browse}</Link></div><small>© 2026 Daily Kebab Burger</small></footer>
     </main>
   );
 }

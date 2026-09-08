@@ -19,7 +19,7 @@ const content = {
     fireFirst: <>FOCUL<br />ÎNTÂI</>, dailyTaste: "GUSTUL DAILY", storyTitle: <>ÎNCEPE CU<br /><em>FOC ADEVĂRAT.</em></>, storyText: "Ingrediente proaspete, carne marinată cu răbdare și jar încins. Atât ne trebuie pentru un gust pe care îl recunoști de la prima îmbucătură.", benefits: [["Proaspăt, în fiecare zi", "Pregătim zilnic carnea, legumele și sosurile casei."], ["Rumenit pe jar", "Focul adevărat adaugă aroma afumată care ne definește."], ["Rapid și fierbinte", "Gătit la comandă și servit exact când trebuie."]],
     reviewsKicker: "DIRECT DE LA MASĂ", reviewsTitle: <>LUMEA E<br /><em>ÎNCÂNTATĂ.</em></>, reviewCount: "Din peste 1.200 de recenzii",
     visitKicker: "VINO CU POFTĂ", visitTitle: <>MASA TA<br /><em>TE AȘTEAPTĂ.</em></>, visitText: "Treci pe la noi, ia loc sau comandă din timp și sari peste așteptare.", findUs: "NE GĂSEȘTI", address: "str. Independentei 50", schedule: "PROGRAM", days: <>Luni–Duminică<br />11:00–23:00</>, callOrder: "Sună și comandă", seeLocation: "Vezi locația", bagText: <>MÂNCARE BUNĂ.<br />STARE BUNĂ.</>,
-    faqKicker: "PE SCURT", faqTitle: <>ÎNTREBĂRI?<br /><em>REZOLVAT.</em></>, footerTagline: "BURGERI & KEBAB, FĂCUȚI ALTFEL.", footerStory: "Poveste", contact: "Contact",
+    faqKicker: "PE SCURT", faqTitle: <>ÎNTREBĂRI?<br /><em>REZOLVAT.</em></>, footerTagline: "BURGERI & KEBAB, FĂCUȚI ALTFEL.", footerStory: "Poveste", contact: "Contact", privacy: "Confidențialitate",
     imageAlts: { kebab: "Kebab Daily cu carne la grătar și legume proaspete", nuggets: "Nuggets Daily crocanți din piept de pui", burger: "Burger Daily cu vită și cheddar", hero: "Burger Daily cu vită, cheddar și legume proaspete" },
   },
   ru: {
@@ -29,7 +29,7 @@ const content = {
     fireFirst: <>ОГОНЬ<br />ПРЕЖДЕ ВСЕГО</>, dailyTaste: "ВКУС DAILY", storyTitle: <>ВСЁ НАЧИНАЕТСЯ<br /><em>С НАСТОЯЩЕГО ОГНЯ.</em></>, storyText: "Свежие продукты, терпеливо маринованное мясо и раскалённые угли. Всё, что нужно для вкуса, который узнаёшь с первого кусочка.", benefits: [["Свежесть каждый день", "Каждый день подготавливаем мясо, овощи и домашние соусы."], ["Обжарено на углях", "Настоящий огонь придаёт нам фирменный аромат дымка."], ["Быстро и горячо", "Готовим по заказу и подаём именно тогда, когда нужно."]],
     reviewsKicker: "ПРЯМО ИЗ-ЗА СТОЛА", reviewsTitle: <>ГОСТИ<br /><em>В ВОСТОРГЕ.</em></>, reviewCount: "На основе более 1 200 отзывов",
     visitKicker: "ПРИХОДИТЕ С АППЕТИТОМ", visitTitle: <>ВАШ СТОЛИК<br /><em>УЖЕ ЖДЁТ.</em></>, visitText: "Заходите к нам, располагайтесь или закажите заранее, чтобы не ждать.", findUs: "НАШ АДРЕС", address: "str. Independentei 50", schedule: "РЕЖИМ РАБОТЫ", days: <>Понедельник–Воскресенье<br />11:00–23:00</>, callOrder: "Позвонить и заказать", seeLocation: "Посмотреть адрес", bagText: <>ВКУСНАЯ ЕДА.<br />ХОРОШЕЕ НАСТРОЕНИЕ.</>,
-    faqKicker: "КОРОТКО О ГЛАВНОМ", faqTitle: <>ЕСТЬ ВОПРОСЫ?<br /><em>ЕСТЬ ОТВЕТЫ.</em></>, footerTagline: "БУРГЕРЫ И КЕБАБ — ПО-НАШЕМУ.", footerStory: "История", contact: "Контакты",
+    faqKicker: "КОРОТКО О ГЛАВНОМ", faqTitle: <>ЕСТЬ ВОПРОСЫ?<br /><em>ЕСТЬ ОТВЕТЫ.</em></>, footerTagline: "БУРГЕРЫ И КЕБАБ — ПО-НАШЕМУ.", footerStory: "История", contact: "Контакты", privacy: "Конфиденциальность",
     imageAlts: { kebab: "Кебаб Daily с мясом на гриле и свежими овощами", nuggets: "Хрустящие наггетсы Daily из куриной грудки", burger: "Бургер Daily с говядиной и чеддером", hero: "Бургер Daily с говядиной, чеддером и свежими овощами" },
   },
 };
@@ -147,7 +147,7 @@ export default function Home() {
 
       <section className={styles.faqSection}><div data-reveal="left"><span className={styles.kicker}>{t.faqKicker}</span><h2>{t.faqTitle}</h2></div><div className={styles.faqList}>{faqs[language].map((faq, index) => <details key={faq[0]} data-reveal="right" data-reveal-delay={index ? String(index) : undefined}><summary>{faq[0]}<span>+</span></summary><p>{faq[1]}</p></details>)}</div></section>
 
-      <footer className={styles.footer} data-reveal="up"><a className={styles.brand} href="#acasa"><Image className={styles.logoImage} src={logoImage} alt="Daily Kebab Burger" /></a><p>{t.footerTagline}</p><div><a href="/menu">{t.menu}</a><a href="/delivery">{t.delivery}</a><a href="#poveste">{t.footerStory}</a><a href="#locatie">{t.contact}</a></div><small>© 2026 Daily Kebab Burger</small></footer>
+      <footer className={styles.footer} data-reveal="up"><a className={styles.brand} href="#acasa"><Image className={styles.logoImage} src={logoImage} alt="Daily Kebab Burger" /></a><p>{t.footerTagline}</p><div><a href="/menu">{t.menu}</a><a href="/delivery">{t.delivery}</a><a href="#poveste">{t.footerStory}</a><a href="#locatie">{t.contact}</a><a href="/privacy">{t.privacy}</a></div><small>© 2026 Daily Kebab Burger</small></footer>
     </main>
   );
 }

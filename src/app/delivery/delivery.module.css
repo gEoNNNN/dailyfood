@@ -119,6 +119,7 @@
 .footer img { width: 122px; height: auto; filter: brightness(0) invert(1); }
 .footer span, .footer a { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
 .footer span { color: var(--yellow); }
+.footer > div { display: flex; align-items: center; gap: 24px; }
 
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }

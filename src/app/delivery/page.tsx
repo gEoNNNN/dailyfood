@@ -33,7 +33,7 @@ const copy = {
     warningTitle: "Număr corect, livrare fără întârzieri", warningText: "Introdu un număr de telefon corect și disponibil. Dacă nu reușim să te contactăm pentru confirmare, comanda online nu poate fi procesată.",
     pricesKicker: "Tarife transparente", pricesTitle: "Zone și prețuri", standardTitle: "Ridicare și sectoare urbane", standardText: "Ridică gratuit din local sau alege livrarea în sectoarele disponibile.", reducedTitle: "Suburbii apropiate", reducedText: "Tarif unic pentru Codru, Băcioi, Bîc și Bubuieci.", suburbTitle: "Livrare Sîngera", suburbText: "Tariful pentru livrarea comenzilor în Sîngera.", zone: "Zonă", price: "MDL",
     checkTitle: "Verifică înainte de plecarea curierului", checkText: "La primire, confruntă produsele și cantitățile cu bonul fiscal. Dacă lipsește ceva sau observi o neconcordanță, anunță livratorul pe loc. Păstrează bonul până la verificarea completă a comenzii.",
-    finalKicker: "Ți-e poftă?", finalTitle: "Alege. Sună. Savurează.", finalText: "Descoperă meniul Daily Kebab sau comandă direct prin telefon.", footer: "Livrare Daily Kebab · zilnic 08:00–22:00",
+    finalKicker: "Ți-e poftă?", finalTitle: "Alege. Sună. Savurează.", finalText: "Descoperă meniul Daily Kebab sau comandă direct prin telefon.", footer: "Livrare Daily Kebab · zilnic 08:00–22:00", privacy: "Confidențialitate",
   },
   ru: {
     back: "Главная", menu: "Открыть меню", call: "Позвонить и заказать", kicker: "Доставка Daily Kebab", title: <>Аппетит приходит.<br /><em>Мы привозим.</em></>, heroText: "Закажите домой или в офис. Термоупаковка и герметичное закрытие сохраняют блюда горячими и готовыми к подаче, как в ресторане.",
@@ -48,7 +48,7 @@ const copy = {
     warningTitle: "Верный номер — доставка без задержек", warningText: "Укажите правильный и доступный номер телефона. Если мы не сможем связаться с вами для подтверждения, онлайн-заказ не будет обработан.",
     pricesKicker: "Понятные тарифы", pricesTitle: "Зоны и стоимость", standardTitle: "Самовывоз и городские секторы", standardText: "Заберите заказ бесплатно или выберите доставку в доступные секторы.", reducedTitle: "Ближайшие пригороды", reducedText: "Единый тариф для Кодру, Бэчой, Бык и Бубуечь.", suburbTitle: "Доставка в Сынжеру", suburbText: "Стоимость доставки заказов в Сынжеру.", zone: "Зона", price: "MDL",
     checkTitle: "Проверьте заказ до ухода курьера", checkText: "При получении сверьте блюда и их количество с кассовым чеком. Если чего-то не хватает или есть несоответствие, сразу сообщите курьеру. Сохраняйте чек до полной проверки заказа.",
-    finalKicker: "Уже хочется?", finalTitle: "Выбирайте. Звоните. Наслаждайтесь.", finalText: "Откройте меню Daily Kebab или оформите заказ по телефону.", footer: "Доставка Daily Kebab · ежедневно 08:00–22:00",
+    finalKicker: "Уже хочется?", finalTitle: "Выбирайте. Звоните. Наслаждайтесь.", finalText: "Откройте меню Daily Kebab или оформите заказ по телефону.", footer: "Доставка Daily Kebab · ежедневно 08:00–22:00", privacy: "Конфиденциальность",
   },
 };
 
@@ -112,7 +112,7 @@ export default function DeliveryPage() {
 
       <section className={styles.finalCta}><span>{t.finalKicker}</span><h2>{t.finalTitle}</h2><p>{t.finalText}</p><div className={styles.actions}><Link className={styles.primaryButton} href="/menu">{t.menu}<span>→</span></Link><a className={styles.lightButton} href="tel:+37379199299">{t.call}<strong>+373 79 199 299</strong></a></div></section>
 
-      <footer className={styles.footer}><Image src={logoImage} alt="Daily Kebab Burger" /><span>{t.footer}</span><Link href="/menu">{t.menu} →</Link></footer>
+      <footer className={styles.footer}><Image src={logoImage} alt="Daily Kebab Burger" /><span>{t.footer}</span><div><Link href="/privacy">{t.privacy}</Link><Link href="/menu">{t.menu} →</Link></div></footer>
     </main>
   );
 }
