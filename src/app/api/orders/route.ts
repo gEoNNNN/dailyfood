@@ -103,12 +103,19 @@ export async function POST(request: Request) {
   if (!botToken || !chatId) return json({ error: "telegram_not_configured" }, 503);
 
   try {
-    const telegramResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    const sendMessage = (destination: string | number) => fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "HTML", disable_web_page_preview: true }),
+      body: JSON.stringify({ chat_id: destination, text: message, parse_mode: "HTML", disable_web_page_preview: true }),
       cache: "no-store",
     });
+
+    let telegramResponse = await sendMessage(chatId);
+    if (!telegramResponse.ok) {
+      const telegramError = await telegramResponse.json() as { parameters?: { migrate_to_chat_id?: number } };
+      const migratedChatId = telegramError.parameters?.migrate_to_chat_id;
+      if (migratedChatId) telegramResponse = await sendMessage(migratedChatId);
+    }
 
     if (!telegramResponse.ok) return json({ error: "telegram_delivery_failed" }, 502);
     return json({ ok: true, orderId });
