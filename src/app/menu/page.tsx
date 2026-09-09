@@ -7,8 +7,9 @@ import { useCart } from "../CartProvider";
 import LanguageSwitch from "../LanguageSwitch";
 import ScrollAnimations from "../ScrollAnimations";
 import { useLanguage } from "../LanguageProvider";
-import { menuCategories, type Language } from "./menuData";
+import type { Language } from "./menuData";
 import styles from "./menu.module.css";
+import { useMenuCategories } from "./useMenuCategories";
 
 const text = {
   ro: { backgroundLabel: "MENIU", homeLabel: "Daily Kebab Burger - Acasă", navLabel: "Navigare meniu", home: "Acasă", categories: "Categorii", delivery: "Livrare", contact: "Contact", order: "Comandă", kicker: "TOT CE-ȚI FACE POFTĂ", title: <>MENIUL<br /><em>DAILY.</em></>, intro: "De la kebab rumenit și burgeri generoși până la gustări și salate proaspete. Alege categoria și găsește-ți favoritul.", stamp: <>CATEGORII<br />PENTRU ORICE POFTĂ</>, promoKicker: "EXTRA POFTĂ?", promoTitle: "FĂ-L DUBLU.", promoText: "Adaugă încă o porție de carne la orice burger pentru doar 10 MDL.", orderKicker: "GATA DE COMANDĂ?", orderTitle: <>SUNĂ. ALEGE.<br /><em>BUCURĂ-TE.</em></>, orderText: "Comandă pentru ridicare, iar noi pregătim totul proaspăt și fierbinte.", days: "Luni–Duminică · 11:00–23:00", footer: "BURGERI & KEBAB, FĂCUȚI ALTFEL.", back: "Înapoi la pagina principală", addToCart: "Adaugă în coș", added: "Adăugat", productPhoto: "fotografie produs", noPhoto: "Băutură rece", privacy: "Confidențialitate" },
@@ -22,6 +23,7 @@ function ArrowIcon() {
 export default function MenuPage() {
   const { language } = useLanguage();
   const { items: cartItems, add } = useCart();
+  const menuCategories = useMenuCategories();
   const currentLanguage: Language = language;
   const t = text[currentLanguage];
 
@@ -47,7 +49,7 @@ export default function MenuPage() {
                 return (
                   <article className={styles.item} key={item.id} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
                     <div className={styles.itemVisual}>
-                      {item.image ? <Image className={item.imageFit === "contain" ? styles.containImage : undefined} src={item.image} alt={`${localizedName} — ${String(t.productPhoto)}`} sizes="(max-width: 640px) calc((100vw - 30px) / 2), (max-width: 960px) 50vw, 425px" placeholder="blur" /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
+                      {item.image ? <Image className={item.imageFit === "contain" ? styles.containImage : undefined} src={item.image} alt={`${localizedName} — ${String(t.productPhoto)}`} sizes="(max-width: 640px) calc((100vw - 30px) / 2), (max-width: 960px) 50vw, 425px" placeholder={typeof item.image === "string" ? "empty" : "blur"} /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
                       {item.tag && <span className={styles.itemTag}>{item.tag[currentLanguage]}</span>}
                     </div>
                     <div className={styles.itemBody}>

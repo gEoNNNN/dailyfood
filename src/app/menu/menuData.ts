@@ -41,6 +41,7 @@ import crispyHotDog from "../../meniu/crispy hotdog.jpg";
 import dailySpecialMeniu from "../../meniu/daily special meniu.jpeg";
 import falafelKebabMeniu from "../../meniu/falafel kebab meniu.png";
 import falafelKebab from "../../meniu/falafel kebab.png";
+import fitnessKebab from "../../meniu/fitness kebab.jpg";
 import greekSalat from "../../meniu/greek salat.jpg";
 import hotDogClassic from "../../meniu/hotdog classic.png";
 import ineleCalamar from "../../meniu/inele calamar.jpeg";
@@ -74,7 +75,7 @@ export type MenuProduct = {
   name: LocalizedText;
   description: LocalizedText;
   price: number;
-  image?: StaticImageData;
+  image?: StaticImageData | string;
   tag?: LocalizedText;
   imageFit?: "cover" | "contain";
 };
@@ -102,7 +103,7 @@ const product = (id: string, ro: string, ru: string, price: number, image: Stati
 
 const kebabItems: MenuProduct[] = [
   product("daily-kebab", "Daily Kebab 400g", "Daily Kebab 400 г", 100, dailySpecialKebab, { ro: "Lavaș, dublu carne de pui, roșii, ceapă roșie, sos special", ru: "Лаваш, двойная порция куриного мяса, помидоры, красный лук, специальный соус" }, tag("Special", "Особый")),
-  { id: "fitness-kebab", name: { ro: "Fitness Kebab 400g", ru: "Fitness Kebab 400 г" }, description: { ro: "Lavaș, nuggets pui, porumb dulce, iceberg, castraveți proaspeți, mozzarella, sos special", ru: "Лаваш, куриные наггетсы, сладкая кукуруза, салат айсберг, свежие огурцы, моцарелла, специальный соус" }, price: 95 },
+  product("fitness-kebab", "Fitness Kebab 400g", "Fitness Kebab 400 г", 95, fitnessKebab, { ro: "Lavaș, nuggets pui, porumb dulce, iceberg, castraveți proaspeți, mozzarella, sos special", ru: "Лаваш, куриные наггетсы, сладкая кукуруза, салат айсберг, свежие огурцы, моцарелла, специальный соус" }),
   product("big-daily-chicken-kebab", "Big Daily Chicken Kebab 800g", "Big Daily Chicken Kebab 800 г", 140, bigChickenKebab, { ro: "Lavaș, carne de pui, cașcaval, cartofi pai, varză, castraveți proaspeți, roșii, sos", ru: "Лаваш, куриное мясо, сыр, картофель фри, капуста, свежие огурцы, помидоры, соус" }, tag("Big", "Большой")),
   product("big-daily-pork-kebab", "Big Daily Pork Kebab 800g", "Big Daily Pork Kebab 800 г", 150, bigPorcKebab, { ro: "Lavaș, carne de porc, cașcaval, cartofi pai, varză, castraveți proaspeți, roșii, sos", ru: "Лаваш, свинина, сыр, картофель фри, капуста, свежие огурцы, помидоры, соус" }, tag("Big", "Большой")),
   product("kebab-pui", "Kebab de Pui 400g", "Кебаб с курицей 400 г", 80, kebabPui, { ro: "Lavaș, carne de pui, cartofi pai, varză, castraveți murați, roșii, sos", ru: "Лаваш, куриное мясо, картофель фри, капуста, маринованные огурцы, помидоры, соус" }, tag("Popular", "Популярное")),

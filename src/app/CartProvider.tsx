@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useCallback, useContext, useMemo, useSyncExternalStore } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore } from "react";
+import type { MenuCategory } from "./menu/menuData";
 
 export type CartItem = {
   id: string;
@@ -67,6 +68,25 @@ function updateCart(updater: (items: CartItem[]) => CartItem[]) {
 export default function CartProvider({ children }: { children: React.ReactNode }) {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const items = useMemo(() => parseItems(snapshot), [snapshot]);
+
+  useEffect(() => {
+    let active = true;
+    async function syncMenu() {
+      try {
+        const response = await fetch("/api/menu");
+        if (!response.ok || !active) return;
+        const categories = await response.json() as MenuCategory[];
+        const products = new Map(categories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
+        updateCart((current) => current.flatMap((item) => {
+          const product = products.get(item.id);
+          return product ? [{ ...item, nameRo: product.name.ro, nameRu: product.name.ru, price: product.price }] : [];
+        }));
+      } catch {}
+    }
+    void syncMenu();
+    return () => { active = false; };
+  }, []);
+
   const add = useCallback((item: NewCartItem) => updateCart((current) => {
     const existing = current.find((entry) => entry.id === item.id);
     return existing ? current.map((entry) => entry.id === item.id ? { ...entry, quantity: entry.quantity + 1 } : entry) : [...current, { ...item, quantity: 1 }];

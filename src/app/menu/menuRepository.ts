@@ -2,6 +2,7 @@ import { menuCategories, type CategoryId, type MenuCategory, type MenuProduct } 
 
 const cacheDuration = 60_000;
 const categoryIds = new Set(menuCategories.map((category) => category.id));
+const localProducts = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
 let cachedMenu: { expiresAt: number; categories: MenuCategory[] } | null = null;
 
 function parseCsv(value: string) {
@@ -49,17 +50,20 @@ function parseMenu(value: string): MenuCategory[] | null {
   const productsByCategory = new Map<CategoryId, Array<MenuProduct & { order: number }>>();
   const seenIds = new Set<string>();
   let recognizedRows = 0;
+  let enabledRows = 0;
 
   for (const record of records) {
     const category = record.category as CategoryId;
     if (!/^[a-z0-9-]{2,100}$/.test(record.id) || !categoryIds.has(category) || seenIds.has(record.id)) continue;
     recognizedRows += 1;
-    if (["false", "0", "nu", "no"].includes(record.active.toLowerCase())) continue;
+    if (["false", "0", "nu", "no"].includes((record.active ?? "").toLowerCase())) continue;
+    enabledRows += 1;
 
     const price = Number(record.price.replace(",", "."));
     if (!record.name_ro || !record.name_ru || !record.description_ro || !record.description_ru || !Number.isFinite(price) || price <= 0 || price > 10_000) continue;
 
-    let image: string | undefined;
+    const localProduct = localProducts.get(record.id);
+    let image = localProduct?.image;
     if (record.image_url) {
       try {
         const imageUrl = new URL(record.image_url);
@@ -73,7 +77,7 @@ function parseMenu(value: string): MenuCategory[] | null {
       description: { ro: record.description_ro.slice(0, 500), ru: record.description_ru.slice(0, 500) },
       price,
       image,
-      imageFit: record.image_fit === "contain" ? "contain" : "cover",
+      imageFit: record.image_fit === "contain" ? "contain" : localProduct?.imageFit ?? "cover",
       order: Number.isFinite(Number(record.order)) ? Number(record.order) : Number.MAX_SAFE_INTEGER,
     };
     if (record.tag_ro || record.tag_ru) product.tag = { ro: record.tag_ro || record.tag_ru, ru: record.tag_ru || record.tag_ro };
@@ -82,9 +86,9 @@ function parseMenu(value: string): MenuCategory[] | null {
     seenIds.add(record.id);
   }
 
-  if (!recognizedRows) return null;
+  if (!recognizedRows || (enabledRows && !seenIds.size)) return null;
   return menuCategories.flatMap((category) => {
-    const items = productsByCategory.get(category.id)?.sort((first, second) => first.order - second.order).map(({ order: _, ...product }) => product) ?? [];
+    const items = productsByCategory.get(category.id)?.sort((first, second) => first.order - second.order).map((item): MenuProduct => ({ id: item.id, name: item.name, description: item.description, price: item.price, image: item.image, tag: item.tag, imageFit: item.imageFit })) ?? [];
     return items.length ? [{ ...category, items }] : [];
   });
 }
@@ -107,12 +111,12 @@ export async function getMenuCategories() {
 
   try {
     const response = await fetch(sheetUrl, { cache: "no-store", signal: AbortSignal.timeout(5_000) });
-    if (!response.ok) return menuCategories;
+    if (!response.ok) return cachedMenu?.categories ?? menuCategories;
     const categories = parseMenu(await response.text());
-    if (!categories) return menuCategories;
+    if (!categories) return cachedMenu?.categories ?? menuCategories;
     cachedMenu = { expiresAt: Date.now() + cacheDuration, categories };
     return categories;
   } catch {
-    return menuCategories;
+    return cachedMenu?.categories ?? menuCategories;
   }
 }

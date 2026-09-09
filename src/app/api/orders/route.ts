@@ -1,4 +1,4 @@
-import { menuCategories } from "../../menu/menuData";
+import { getMenuCategories } from "../../menu/menuRepository";
 
 type OrderRequest = {
   language?: unknown;
@@ -15,7 +15,6 @@ type OrderRequest = {
 
 type RequestedItem = { id?: unknown; quantity?: unknown };
 
-const products = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
 const deliveryOptions = {
   pickup: { label: "Ridicare din local / Самовывоз", fee: 0, requiresAddress: false },
   botanica: { label: "Botanica / Ботаника", fee: 50, requiresAddress: true },
@@ -75,6 +74,8 @@ export async function POST(request: Request) {
     return json({ error: "invalid_items" }, 400);
   }
 
+  const menuCategories = await getMenuCategories();
+  const products = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
   const orderItems = (body.items as RequestedItem[]).map((requested) => {
     const id = text(requested.id, 100);
     const quantity = typeof requested.quantity === "number" && Number.isInteger(requested.quantity) ? requested.quantity : 0;

@@ -9,6 +9,7 @@ import { useCart } from "./CartProvider";
 import LanguageSwitch from "./LanguageSwitch";
 import ScrollAnimations from "./ScrollAnimations";
 import { Language, useLanguage } from "./LanguageProvider";
+import { useMenuCategories } from "./menu/useMenuCategories";
 import styles from "./page.module.css";
 
 const content = {
@@ -34,18 +35,11 @@ const content = {
   },
 };
 
-const menuItems = {
-  ro: [
-    { tag: "CEL MAI VÂNDUT", name: "Big Daily Burger 340g", description: "Dublu carne de porc, dublu bacon, dublu cașcaval și sos BBQ.", price: "95 MDL", type: "burger", color: "orange" },
-    { tag: "POPULAR", name: "Kebab de Pui 400g", description: "Lavaș, carne de pui, cartofi pai, varză, castraveți murați, roșii și sos.", price: "80 MDL", type: "kebab", color: "red" },
-    { tag: "SUPER CROCANT", name: "Nuggets de Pui 220g", description: "Nuggets de pui crocanți, serviți cu sos la alegere.", price: "75 MDL", type: "nuggets", color: "green" },
-  ],
-  ru: [
-    { tag: "ХИТ ПРОДАЖ", name: "Big Daily Burger 340 г", description: "Двойная порция свинины, двойной бекон, двойной сыр и соус BBQ.", price: "95 MDL", type: "burger", color: "orange" },
-    { tag: "ПОПУЛЯРНОЕ", name: "Кебаб с курицей 400 г", description: "Лаваш, куриное мясо, картофель фри, капуста, маринованные огурцы, помидоры и соус.", price: "80 MDL", type: "kebab", color: "red" },
-    { tag: "СУПЕРХРУСТЯЩИЕ", name: "Куриные наггетсы 220 г", description: "Хрустящие куриные наггетсы с соусом на выбор.", price: "75 MDL", type: "nuggets", color: "green" },
-  ],
-};
+const featuredProducts = [
+  { id: "big-daily-burger", type: "burger", color: "orange" },
+  { id: "kebab-pui", type: "kebab", color: "red" },
+  { id: "nuggets-pui", type: "nuggets", color: "green" },
+] as const;
 
 const reviews = {
   ro: [
@@ -97,8 +91,13 @@ function FoodArtwork({ type, language }: { type: string; language: Language }) {
 export default function Home() {
   const { language } = useLanguage();
   const { items: cartItems, add } = useCart();
+  const menuCategories = useMenuCategories();
   const t = content[language];
-  const items = menuItems[language];
+  const products = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
+  const items = featuredProducts.flatMap((featured) => {
+    const product = products.get(featured.id);
+    return product ? [{ ...featured, product }] : [];
+  });
   const currentReviews = reviews[language];
 
   return (
@@ -122,10 +121,9 @@ export default function Home() {
 
       <section className={styles.menuSection} id="favorite">
         <div className={styles.sectionIntro} data-reveal="up"><div><span className={styles.kicker}>{t.favoritesKicker}</span><h2>{t.favoritesTitle}</h2></div><p>{t.favoritesText}</p></div>
-        <div className={styles.menuGrid}>{items.map((item, index) => {
-          const id = `featured-${index}`;
-          const quantity = cartItems.find((cartItem) => cartItem.id === id)?.quantity ?? 0;
-          return <article className={styles.menuCard} key={id} data-reveal="up" data-reveal-delay={String(index + 1)}><div className={`${styles.cardVisual} ${styles[item.color]}`}><span>{item.tag}</span><FoodArtwork type={item.type} language={language} /></div><div className={styles.cardInfo}><div><h3>{item.name}</h3><p>{item.description}</p></div><strong>{item.price}</strong></div><button className={styles.addButton} type="button" onClick={() => add({ id, nameRo: menuItems.ro[index].name, nameRu: menuItems.ru[index].name, price: Number(item.price.split(" ")[0]) })}>{quantity ? `${t.added} · ${quantity}` : t.addToCart}<span>+</span></button></article>;
+        <div className={styles.menuGrid}>{items.map(({ product, type, color }, index) => {
+          const quantity = cartItems.find((cartItem) => cartItem.id === product.id)?.quantity ?? 0;
+          return <article className={styles.menuCard} key={product.id} data-reveal="up" data-reveal-delay={String(index + 1)}><div className={`${styles.cardVisual} ${styles[color]}`}><span>{product.tag?.[language] ?? product.name[language]}</span><FoodArtwork type={type} language={language} /></div><div className={styles.cardInfo}><div><h3>{product.name[language]}</h3><p>{product.description[language]}</p></div><strong>{product.price} MDL</strong></div><button className={styles.addButton} type="button" onClick={() => add({ id: product.id, nameRo: product.name.ro, nameRu: product.name.ru, price: product.price })}>{quantity ? `${t.added} · ${quantity}` : t.addToCart}<span>+</span></button></article>;
         })}</div>
         <a className={styles.textLink} href="/menu">{t.fullMenu} <ArrowIcon /></a>
       </section>
