@@ -1,5 +1,5 @@
 import type { StaticImageData } from "next/image";
-import kebabPuiCartofi from "../../meniu/2Kebab pui + cartofi pai.jpeg";
+import kebabPuiCartofi from "../../meniu/doi-kebab-pui-cartofi.jpeg";
 import aripioareChilli from "../../meniu/Aripioare chilli.jpg";
 import baconBurger from "../../meniu/Bacon Burger.jpg";
 import baconBurgerMeniu from "../../meniu/Bacon burger meniu.jpg";
