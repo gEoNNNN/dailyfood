@@ -22,7 +22,7 @@ const suburbPrices = [
 const copy = {
   ro: {
     back: "Acasă", menu: "Vezi meniul", call: "Sună și comandă", kicker: "Livrare Daily Kebab", title: <>Pofta vine.<br /><em>Noi o aducem.</em></>, heroText: "Comandă acasă sau la birou. Ambalajele termice și închiderea ermetică păstrează preparatele calde și gata de servit, exact ca în local.",
-    scheduleLabel: "Program livrare", schedule: "08:00–22:00", timeLabel: "Timp estimativ", time: "aprox. 1h30", paymentLabel: "Plată la curier", payment: "Numerar sau card",
+    scheduleLabel: "Program livrare", schedule: "11:00–22:30", timeLabel: "Timp estimativ", time: "aprox. 1h30", paymentLabel: "Plată la curier", payment: "Numerar sau card",
     freeEyebrow: "Comandă minimă 130 MDL", freeTitle: "Livrare gratuită în oraș de la 500 MDL", freeText: "Livrăm doar în Botanica, Telecentru și Centru, precum și în Codru, Băcioi, Bîc, Sîngera și Bubuieci. Ridicarea din local este gratuită.",
     howKicker: "Simplu și sigur", howTitle: "Cum comanzi", steps: [
       ["Alege produsele", "Adaugă în coș tot ce îți face poftă și verifică atent conținutul comenzii."],
@@ -33,11 +33,11 @@ const copy = {
     warningTitle: "Număr corect, livrare fără întârzieri", warningText: "Introdu un număr de telefon corect și disponibil. Dacă nu reușim să te contactăm pentru confirmare, comanda online nu poate fi procesată.",
     pricesKicker: "Tarife transparente", pricesTitle: "Zone și prețuri", standardTitle: "Ridicare și sectoare urbane", standardText: "Ridică gratuit din local sau alege livrarea în sectoarele disponibile.", reducedTitle: "Suburbii apropiate", reducedText: "Tarif unic pentru Codru, Băcioi, Bîc și Bubuieci.", suburbTitle: "Livrare Sîngera", suburbText: "Tariful pentru livrarea comenzilor în Sîngera.", zone: "Zonă", price: "MDL",
     checkTitle: "Verifică înainte de plecarea curierului", checkText: "La primire, confruntă produsele și cantitățile cu bonul fiscal. Dacă lipsește ceva sau observi o neconcordanță, anunță livratorul pe loc. Păstrează bonul până la verificarea completă a comenzii.",
-    finalKicker: "Ți-e poftă?", finalTitle: "Alege. Sună. Savurează.", finalText: "Descoperă meniul Daily Kebab sau comandă direct prin telefon.", footer: "Livrare Daily Kebab · zilnic 08:00–22:00", privacy: "Confidențialitate",
+    finalKicker: "Ți-e poftă?", finalTitle: "Alege. Sună. Savurează.", finalText: "Descoperă meniul Daily Kebab sau comandă direct prin telefon.", footer: "Livrare Daily Kebab · zilnic 11:00–22:30", privacy: "Confidențialitate",
   },
   ru: {
     back: "Главная", menu: "Открыть меню", call: "Позвонить и заказать", kicker: "Доставка Daily Kebab", title: <>Аппетит приходит.<br /><em>Мы привозим.</em></>, heroText: "Закажите домой или в офис. Термоупаковка и герметичное закрытие сохраняют блюда горячими и готовыми к подаче, как в ресторане.",
-    scheduleLabel: "Время доставки", schedule: "08:00–22:00", timeLabel: "Примерное время", time: "около 1 ч 30 мин", paymentLabel: "Оплата курьеру", payment: "Наличными или картой",
+    scheduleLabel: "Время доставки", schedule: "11:00–22:30", timeLabel: "Примерное время", time: "около 1 ч 30 мин", paymentLabel: "Оплата курьеру", payment: "Наличными или картой",
     freeEyebrow: "Минимальный заказ 130 MDL", freeTitle: "Бесплатная доставка по городу от 500 MDL", freeText: "Доставляем только на Ботанику, Телецентр и в Центр, а также в Кодру, Бэчой, Бык, Сынжеру и Бубуечь. Самовывоз бесплатный.",
     howKicker: "Просто и надёжно", howTitle: "Как заказать", steps: [
       ["Выберите блюда", "Добавьте в корзину всё, что хочется, и внимательно проверьте состав заказа."],
@@ -48,7 +48,7 @@ const copy = {
     warningTitle: "Верный номер — доставка без задержек", warningText: "Укажите правильный и доступный номер телефона. Если мы не сможем связаться с вами для подтверждения, онлайн-заказ не будет обработан.",
     pricesKicker: "Понятные тарифы", pricesTitle: "Зоны и стоимость", standardTitle: "Самовывоз и городские секторы", standardText: "Заберите заказ бесплатно или выберите доставку в доступные секторы.", reducedTitle: "Ближайшие пригороды", reducedText: "Единый тариф для Кодру, Бэчой, Бык и Бубуечь.", suburbTitle: "Доставка в Сынжеру", suburbText: "Стоимость доставки заказов в Сынжеру.", zone: "Зона", price: "MDL",
     checkTitle: "Проверьте заказ до ухода курьера", checkText: "При получении сверьте блюда и их количество с кассовым чеком. Если чего-то не хватает или есть несоответствие, сразу сообщите курьеру. Сохраняйте чек до полной проверки заказа.",
-    finalKicker: "Уже хочется?", finalTitle: "Выбирайте. Звоните. Наслаждайтесь.", finalText: "Откройте меню Daily Kebab или оформите заказ по телефону.", footer: "Доставка Daily Kebab · ежедневно 08:00–22:00", privacy: "Конфиденциальность",
+    finalKicker: "Уже хочется?", finalTitle: "Выбирайте. Звоните. Наслаждайтесь.", finalText: "Откройте меню Daily Kebab или оформите заказ по телефону.", footer: "Доставка Daily Kebab · ежедневно 11:00–22:30", privacy: "Конфиденциальность",
   },
 };
 
@@ -87,7 +87,7 @@ export default function DeliveryPage() {
       </section>
 
       <section className={styles.freeBanner}>
-        <div><span>{t.freeEyebrow}</span><h2>{t.freeTitle}</h2></div><p>{t.freeText}</p><strong>08–22 <small>{language === "ro" ? "zilnic" : "ежедневно"}</small></strong>
+        <div><span>{t.freeEyebrow}</span><h2>{t.freeTitle}</h2></div><p>{t.freeText}</p><strong>11:00–22:30 <small>{language === "ro" ? "zilnic" : "ежедневно"}</small></strong>
       </section>
 
       <section className={styles.processSection}>

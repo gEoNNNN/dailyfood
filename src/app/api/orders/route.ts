@@ -62,11 +62,12 @@ export async function POST(request: Request) {
   const payment = body.payment === "card" ? "card" : body.payment === "cash" ? "cash" : null;
   const name = text(body.name, 80);
   const phone = text(body.phone, 30);
+  const phoneDigits = phone.replace(/\D/g, "");
   const address = text(body.address, 180);
   const apartment = text(body.apartment, 100);
   const notes = text(body.notes, 500);
 
-  if (!deliveryOption || !payment || name.length < 2 || !/^(?:\+373|0)\s?\d{2}(?:\s?\d{3}){2}$/.test(phone) || (deliveryOption.requiresAddress && address.length < 4)) {
+  if (!deliveryOption || !payment || name.length < 2 || !/^(?:373\d{8}|0\d{8})$/.test(phoneDigits) || (deliveryOption.requiresAddress && address.length < 4)) {
     return json({ error: "invalid_customer_details" }, 400);
   }
 
@@ -109,15 +110,31 @@ export async function POST(request: Request) {
       body: JSON.stringify({ chat_id: destination, text: message, parse_mode: "HTML", disable_web_page_preview: true }),
       cache: "no-store",
     });
+    const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+    let destination: string | number = chatId;
+    let telegramResponse: Response | null = null;
 
-    let telegramResponse = await sendMessage(chatId);
-    if (!telegramResponse.ok) {
-      const telegramError = await telegramResponse.json() as { parameters?: { migrate_to_chat_id?: number } };
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        telegramResponse = await sendMessage(destination);
+      } catch {
+        if (attempt === 2) throw new Error("telegram_unavailable");
+        await wait(300 * (attempt + 1));
+        continue;
+      }
+      if (telegramResponse.ok) break;
+
+      const telegramError = await telegramResponse.json() as { parameters?: { migrate_to_chat_id?: number; retry_after?: number } };
       const migratedChatId = telegramError.parameters?.migrate_to_chat_id;
-      if (migratedChatId) telegramResponse = await sendMessage(migratedChatId);
+      if (migratedChatId) {
+        destination = migratedChatId;
+        continue;
+      }
+      if (telegramResponse.status !== 429 && telegramResponse.status < 500) break;
+      await wait(Math.min((telegramError.parameters?.retry_after ?? attempt + 1) * 1_000, 3_000));
     }
 
-    if (!telegramResponse.ok) return json({ error: "telegram_delivery_failed" }, 502);
+    if (!telegramResponse?.ok) return json({ error: "telegram_delivery_failed" }, 502);
     return json({ ok: true, orderId });
   } catch {
     return json({ error: "telegram_unavailable" }, 502);

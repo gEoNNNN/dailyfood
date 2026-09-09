@@ -23,6 +23,31 @@ const privacyText = {
   ru: { notice: "Подтверждаю, что ознакомился(-ась) с", link: "Политикой конфиденциальности", footer: "Конфиденциальность" },
 } as const;
 
+const errorMessages: Record<"ro" | "ru", Record<string, string>> = {
+  ro: {
+    invalid_customer_details: "Verifică numele, numărul de telefon și adresa de livrare.",
+    invalid_items: "Meniul sau coșul a fost actualizat. Reîncarcă pagina și adaugă din nou produsele.",
+    delivery_minimum_not_met: "Comanda nu atinge suma minimă pentru livrare.",
+    telegram_not_configured: "Serviciul de comenzi nu este configurat. Sună-ne pentru a plasa comanda.",
+    telegram_delivery_failed: "Telegram nu a putut primi comanda. Încearcă din nou sau sună-ne.",
+    telegram_unavailable: "Telegram este momentan indisponibil. Încearcă din nou sau sună-ne.",
+    invalid_origin: "Pagina deschisă nu mai este actuală. Reîncarcă site-ul și încearcă din nou.",
+    invalid_request: "Datele comenzii nu au putut fi citite. Reîncarcă pagina și încearcă din nou.",
+    network: "Conexiunea la internet a fost întreruptă. Verifică rețeaua și încearcă din nou.",
+  },
+  ru: {
+    invalid_customer_details: "Проверьте имя, номер телефона и адрес доставки.",
+    invalid_items: "Меню или корзина обновились. Перезагрузите страницу и добавьте товары заново.",
+    delivery_minimum_not_met: "Сумма заказа меньше минимальной суммы доставки.",
+    telegram_not_configured: "Сервис заказов не настроен. Позвоните нам, чтобы оформить заказ.",
+    telegram_delivery_failed: "Telegram не смог получить заказ. Попробуйте снова или позвоните нам.",
+    telegram_unavailable: "Telegram временно недоступен. Попробуйте снова или позвоните нам.",
+    invalid_origin: "Открытая страница устарела. Перезагрузите сайт и попробуйте снова.",
+    invalid_request: "Не удалось прочитать данные заказа. Перезагрузите страницу и попробуйте снова.",
+    network: "Интернет-соединение прервано. Проверьте сеть и попробуйте снова.",
+  },
+};
+
 const deliveryOptions = {
   ro: [
     { id: "pickup", label: "Ridicarea produsului din local", fee: 0 },
@@ -49,6 +74,7 @@ export default function CheckoutPage() {
   const [deliveryOption, setDeliveryOption] = useState<DeliveryOption | "">("");
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [orderId, setOrderId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const t = text[language];
   const privacy = privacyText[language];
   const currentDeliveryOptions = deliveryOptions[language];
@@ -63,6 +89,7 @@ export default function CheckoutPage() {
     if (status === "submitting" || deliveryMinimumMissing > 0) return;
 
     const form = new FormData(event.currentTarget);
+    setErrorMessage("");
     setStatus("submitting");
 
     try {
@@ -82,13 +109,19 @@ export default function CheckoutPage() {
           items: items.map((item) => ({ id: item.id, quantity: item.quantity })),
         }),
       });
-      const result = await response.json() as { ok?: boolean; orderId?: string };
-      if (!response.ok || !result.ok || !result.orderId) throw new Error("order_failed");
+      const result = await response.json() as { ok?: boolean; orderId?: string; error?: string };
+      if (!response.ok || !result.ok || !result.orderId) {
+        setErrorMessage(errorMessages[language][result.error ?? ""] ?? t.errorText);
+        setStatus("error");
+        window.setTimeout(() => document.getElementById("order-error")?.scrollIntoView({ behavior: "smooth", block: "center" }), 0);
+        return;
+      }
       setOrderId(result.orderId);
       setStatus("success");
       clear();
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
+      setErrorMessage(errorMessages[language].network);
       setStatus("error");
       window.setTimeout(() => document.getElementById("order-error")?.scrollIntoView({ behavior: "smooth", block: "center" }), 0);
     }
@@ -155,7 +188,7 @@ export default function CheckoutPage() {
               <div className={styles.totals}><div className={styles.total}><span>{t.total}</span><strong>{totalPrice} MDL</strong></div><div className={styles.total}><span>{t.deliveryFee}</span><strong>{deliveryFee} MDL</strong></div><div className={`${styles.total} ${styles.grandTotal}`}><span>{t.grandTotal}</span><strong>{totalPrice + deliveryFee} MDL</strong></div></div>
               <div className={styles.privacyNotice}><input id="privacy-read" name="privacyRead" type="checkbox" required /><label htmlFor="privacy-read">{privacy.notice} <Link href="/privacy" target="_blank">{privacy.link}</Link>.</label></div>
               <button className={styles.submitButton} type="submit" disabled={status === "submitting" || deliveryMinimumMissing > 0}>{status === "submitting" ? t.placing : t.submit}<span>{status === "submitting" ? "···" : "→"}</span></button>
-              {status === "error" && <div className={styles.errorNotice} id="order-error" role="alert"><b>{t.errorTitle}</b><p>{t.errorText}</p><div><button type="button" onClick={() => setStatus("idle")}>{t.retry}</button><a href="tel:+37379199299">{t.call}</a></div></div>}
+              {status === "error" && <div className={styles.errorNotice} id="order-error" role="alert"><b>{t.errorTitle}</b><p>{errorMessage || t.errorText}</p><div><button type="button" onClick={() => setStatus("idle")}>{t.retry}</button><a href="tel:+37379199299">{t.call}</a></div></div>}
             </aside>
           </form>
         </>
