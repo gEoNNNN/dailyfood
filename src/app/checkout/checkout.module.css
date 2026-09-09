@@ -3,7 +3,7 @@
   --cream: #f5eddb;
   --yellow: #f4c430;
   --red: #d8492f;
-  --green: #315d43;
+  --gold: #f4c430;
   min-height: 100vh;
   color: var(--ink);
   background: var(--cream);
@@ -45,10 +45,10 @@
 .choiceGroup label > span { display: flex; min-height: 52px; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 14px; border: 2px solid var(--ink); font-size: 11px; font-weight: 900; text-transform: uppercase; }
 .choiceGroup label > span b { max-width: 520px; line-height: 1.35; }
 .choiceGroup label > span strong { flex: 0 0 auto; color: var(--red); font-size: 13px; }
-.choiceGroup .selectedChoice > span { color: var(--cream); background: var(--green); box-shadow: 4px 4px 0 var(--yellow); }
-.choiceGroup .selectedChoice > span strong { color: var(--yellow); }
+.choiceGroup .selectedChoice > span { color: var(--ink); background: var(--gold); box-shadow: 4px 4px 0 var(--red); }
+.choiceGroup .selectedChoice > span strong { color: var(--red); }
 .choiceGroup input:focus-visible + span, .paymentGroup input:focus-visible + span { outline: 3px solid var(--red); outline-offset: 3px; }
-.deliveryPolicies { display: grid; gap: 8px; margin-bottom: 14px; padding: 16px 18px; border-left: 5px solid var(--green); background: var(--yellow); }
+.deliveryPolicies { display: grid; gap: 8px; margin-bottom: 14px; padding: 16px 18px; border-left: 5px solid var(--red); background: var(--yellow); }
 .deliveryPolicies strong { font-size: 11px; text-transform: uppercase; line-height: 1.4; }
 .deliveryPolicies p { padding-top: 6px; border-top: 1px solid rgba(31, 33, 25, .35); font-size: 11px; font-weight: 700; line-height: 1.55; }
 .minimumWarning { margin-bottom: 20px; padding: 12px 15px; color: var(--cream); border: 2px solid var(--ink); background: var(--red); font-size: 11px; font-weight: 900; line-height: 1.45; }
@@ -60,7 +60,7 @@
 .fullField { grid-column: 1 / -1; }
 .fields input, .fields textarea { width: 100%; min-height: 50px; padding: 13px 14px; color: var(--ink); border: 2px solid #858276; border-radius: 0; background: var(--cream); font: inherit; font-size: 14px; }
 .fields textarea { resize: vertical; }
-.fields input:focus, .fields textarea:focus { border-color: var(--green); outline: 2px solid var(--green); outline-offset: 1px; }
+.fields input:focus, .fields textarea:focus { border-color: var(--gold); outline: 2px solid var(--gold); outline-offset: 1px; }
 
 .paymentGroup { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .paymentGroup legend { width: 100%; }
@@ -83,10 +83,10 @@
 .grandTotal { margin-top: 8px; padding-top: 16px; border-top: 2px solid var(--ink); font-size: 13px; }
 .grandTotal strong { font-size: 26px; }
 .privacyNotice { display: grid; grid-template-columns: 18px 1fr; gap: 10px; margin-bottom: 17px; color: #5f5c52; font-size: 11px; font-weight: 650; line-height: 1.45; }
-.privacyNotice input { width: 18px; height: 18px; accent-color: var(--green); }
+.privacyNotice input { width: 18px; height: 18px; accent-color: var(--gold); }
 .privacyNotice a { font-weight: 900; text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: 2px; }
-.submitButton { display: flex; width: 100%; min-height: 62px; align-items: center; justify-content: space-between; gap: 15px; padding: 0 20px; color: var(--cream); border: 2px solid var(--ink); background: var(--green); box-shadow: 6px 6px 0 var(--yellow); font: inherit; font-size: 12px; font-weight: 950; text-align: left; text-transform: uppercase; letter-spacing: .04em; cursor: pointer; }
-.submitButton span { color: var(--yellow); font-size: 22px; }
+.submitButton { display: flex; width: 100%; min-height: 62px; align-items: center; justify-content: space-between; gap: 15px; padding: 0 20px; color: var(--ink); border: 2px solid var(--ink); background: var(--gold); box-shadow: 6px 6px 0 var(--red); font: inherit; font-size: 12px; font-weight: 950; text-align: left; text-transform: uppercase; letter-spacing: .04em; cursor: pointer; }
+.submitButton span { color: var(--red); font-size: 22px; }
 .notice { margin-top: 24px; padding: 20px; border: 2px solid var(--ink); background: var(--yellow); box-shadow: 5px 5px 0 var(--red); }
 .notice b { font-size: 16px; text-transform: uppercase; }
 .notice p { margin: 9px 0 15px; font-size: 12px; font-weight: 600; line-height: 1.55; }
@@ -101,10 +101,10 @@
 .errorNotice a { display: flex; align-items: center; background: var(--yellow); }
 
 .successState { display: flex; min-height: calc(100vh - 160px); flex-direction: column; align-items: center; justify-content: center; padding: 80px 24px 110px; text-align: center; animation: successContent 700ms cubic-bezier(.16, 1, .3, 1) both; }
-.successBurst { position: relative; display: grid; width: 112px; height: 112px; margin-bottom: 32px; place-items: center; border: 3px solid var(--ink); border-radius: 50%; background: var(--green); box-shadow: 9px 9px 0 var(--yellow); animation: successPop 750ms cubic-bezier(.16, 1.35, .3, 1) both; }
-.successBurst::before, .successBurst::after { content: ""; position: absolute; inset: -18px; border: 3px solid var(--green); border-radius: 50%; animation: successRing 1.3s ease-out 350ms both; }
-.successBurst::after { inset: -35px; border-color: var(--yellow); animation-delay: 500ms; }
-.successBurst span { color: var(--cream); font-size: 58px; font-weight: 950; transform: rotate(-7deg); }
+.successBurst { position: relative; display: grid; width: 112px; height: 112px; margin-bottom: 32px; place-items: center; border: 3px solid var(--ink); border-radius: 50%; background: var(--gold); box-shadow: 9px 9px 0 var(--red); animation: successPop 750ms cubic-bezier(.16, 1.35, .3, 1) both; }
+.successBurst::before, .successBurst::after { content: ""; position: absolute; inset: -18px; border: 3px solid var(--gold); border-radius: 50%; animation: successRing 1.3s ease-out 350ms both; }
+.successBurst::after { inset: -35px; border-color: var(--red); animation-delay: 500ms; }
+.successBurst span { color: var(--ink); font-size: 58px; font-weight: 950; transform: rotate(-7deg); }
 .successKicker { color: var(--red); font-size: 11px; font-weight: 950; letter-spacing: .18em; }
 .successState h1 { max-width: 900px; margin-top: 14px; font-size: clamp(52px, 8vw, 105px); font-weight: 950; line-height: .84; letter-spacing: -.07em; text-transform: uppercase; }
 .successState > p { max-width: 650px; margin-top: 24px; color: #666359; font-size: 16px; font-weight: 600; line-height: 1.6; }
@@ -113,7 +113,7 @@
 .orderNumber strong { font-size: 20px; }
 .successActions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
 .successActions a { display: flex; min-height: 48px; align-items: center; padding: 0 18px; border: 2px solid var(--ink); background: var(--cream); font-size: 10px; font-weight: 900; text-transform: uppercase; }
-.successActions a:last-child { color: var(--cream); background: var(--green); }
+.successActions a:last-child { color: var(--ink); background: var(--gold); }
 
 @keyframes successPop {
   from { opacity: 0; transform: scale(.35) rotate(-18deg); }
@@ -134,7 +134,7 @@
 .emptyState > span { display: grid; width: 54px; height: 54px; place-items: center; color: var(--cream); background: var(--red); font-size: 12px; font-weight: 900; transform: rotate(-5deg); }
 .emptyState h1 { max-width: 760px; margin-top: 25px; font-size: clamp(45px, 7vw, 90px); font-weight: 950; line-height: .9; letter-spacing: -.06em; text-transform: uppercase; }
 .emptyState p { margin: 18px 0 24px; color: #666359; }
-.emptyState > a { padding: 17px 22px; color: var(--cream); border: 2px solid var(--ink); background: var(--green); font-size: 12px; font-weight: 900; text-transform: uppercase; }
+.emptyState > a { padding: 17px 22px; color: var(--ink); border: 2px solid var(--ink); background: var(--gold); font-size: 12px; font-weight: 900; text-transform: uppercase; }
 .footer { display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-bottom: 72px; padding: 36px max(32px, calc((100% - 1280px) / 2)); color: var(--cream); background: var(--ink); }
 .footer > span { color: var(--yellow); font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
 .footer > div { display: flex; gap: 24px; font-size: 10px; font-weight: 900; text-transform: uppercase; }

@@ -62,7 +62,7 @@ const reviews = {
 
 const faqs = {
   ro: [
-    ["Ce găsesc în meniul Daily Kebab?", "Meniul include kebaburi, burgeri, meniuri combo, hot dog, gustări, platouri, salate, sosuri și băuturi. Produsele și prețurile actuale sunt afișate în pagina Meniu."],
+    ["Ce găsesc în meniul Daily Kebab?", "Meniul include kebaburi, burgeri, meniuri combo, hot dog, gustări, salate, sosuri și băuturi. Produsele și prețurile actuale sunt afișate în pagina Meniu."],
     ["Aveți opțiuni vegetariene sau de post?", "Da. Poți alege Daily Falafel Kebab, Daily Kebab de Post și variantele lor de meniu, precum și Salata Grecească."],
     ["În ce zone livrați?", "Livrăm în Botanica, Centru și Telecentru, precum și în Codru, Băcioi, Bîc, Sîngera și Bubuieci. Tariful depinde de zona selectată."],
     ["Care este comanda minimă și când livrarea este gratuită?", "Comanda minimă pentru livrare este de 130 MDL. Livrarea în oraș este gratuită pentru comenzile de minimum 500 MDL, iar ridicarea din local este gratuită."],
@@ -70,7 +70,7 @@ const faqs = {
     ["Care este programul?", "Localul este deschis zilnic între 11:00 și 23:00, iar programul de livrare este 08:00–22:00. Ne găsești pe str. Independenței 50, Chișinău."],
   ],
   ru: [
-    ["Что есть в меню Daily Kebab?", "В меню представлены кебабы, бургеры, комбо-меню, хот-доги, закуски, большие сеты, салаты, соусы и напитки. Актуальные блюда и цены указаны на странице меню."],
+    ["Что есть в меню Daily Kebab?", "В меню представлены кебабы, бургеры, комбо-меню, хот-доги, закуски, салаты, соусы и напитки. Актуальные блюда и цены указаны на странице меню."],
     ["Есть ли вегетарианские или постные блюда?", "Да. Можно выбрать Daily Falafel Kebab, постный Daily Kebab и наборы с ними, а также греческий салат."],
     ["В какие районы вы доставляете?", "Мы доставляем на Ботанику, в Центр и Телецентр, а также в Кодру, Бэчой, Бык, Сынжеру и Бубуечь. Стоимость зависит от выбранной зоны."],
     ["Какая минимальная сумма заказа и когда доставка бесплатная?", "Минимальная сумма заказа для доставки — 130 MDL. Доставка по городу бесплатная при заказе от 500 MDL, самовывоз всегда бесплатный."],

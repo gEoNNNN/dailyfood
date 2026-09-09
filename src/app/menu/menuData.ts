@@ -57,10 +57,6 @@ import nuggetsKebabMeniu from "../../meniu/nuggets kebab meniu.jpg";
 import nuggetsKebab from "../../meniu/nuggets kebab.jpg";
 import nuggetsTray from "../../meniu/nuggets tray.jpg";
 import nuggets from "../../meniu/nuggets.jpg";
-import platouPorc from "../../meniu/platou de porc.jpg";
-import platouPui from "../../meniu/platou de pui.jpg";
-import platouMici from "../../meniu/platou mici.jpeg";
-import platouNuggets from "../../meniu/platou nuggets.jpg";
 import porkBeefBurgerMeniu from "../../meniu/pork beef burger meniu.jpg";
 import porkBeefBurger from "../../meniu/pork beef burger.jpg";
 import porkTray from "../../meniu/pork tray.jpg";
@@ -97,7 +93,6 @@ const descriptions = {
   kebabMenu: { ro: "Meniu complet pentru o masă consistentă.", ru: "Полноценный сытный набор." },
   burgerMenu: { ro: "Burger în combinație de meniu.", ru: "Бургер в составе комбо-набора." },
   side: { ro: "Gustare crocantă, potrivită de împărțit.", ru: "Хрустящая закуска, которой удобно делиться." },
-  tray: { ro: "Platou generos, potrivit de împărțit.", ru: "Большое ассорти, которым удобно делиться." },
   sauce: { ro: "Sos pentru gustul tău preferat.", ru: "Соус к вашему любимому блюду." },
   salad: { ro: "Salată proaspătă, pregătită la comandă.", ru: "Свежий салат, приготовленный на заказ." },
 } satisfies Record<string, LocalizedText>;
@@ -180,10 +175,6 @@ const crokiItems: MenuProduct[] = [
   product("sos-bbq", "Sos BBQ", "Соус BBQ", 12, bbq, descriptions.sauce),
   product("ketchup", "Ketchup", "Кетчуп", 10, ketchup, descriptions.sauce),
   product("maioneza", "Maioneză", "Майонез", 10, maioneza, descriptions.sauce),
-  product("platou-porc", "Platou de Porc", "Сет со свининой", 175, platouPorc, descriptions.tray),
-  product("platou-pui", "Platou de Pui", "Куриный сет", 165, platouPui, descriptions.tray),
-  product("platou-mici", "Platou cu Mici", "Сет с мититеями", 180, platouMici, descriptions.tray),
-  product("platou-nuggets", "Platou Nuggets", "Сет с наггетсами", 150, platouNuggets, descriptions.tray),
   product("sos-burger", "Sos Burger", "Бургер-соус", 12, sosBurger, descriptions.sauce),
   product("sos-usturoi", "Sos de Usturoi", "Чесночный соус", 12, sosUsturoi, descriptions.sauce),
 ];
@@ -210,7 +201,7 @@ export const menuCategories: MenuCategory[] = [
   { id: "burger", number: "02", name: { ro: "Burger", ru: "Бургеры" }, note: { ro: "Burgeri generoși, făcuți la comandă.", ru: "Сытные бургеры, приготовленные на заказ." }, items: burgerItems },
   { id: "kebab-menu", number: "03", name: { ro: "Kebab Menu", ru: "Кебаб-меню" }, note: { ro: "Combinații complete cu kebabul preferat.", ru: "Полные наборы с любимым кебабом." }, items: kebabMenuItems },
   { id: "burger-menu", number: "04", name: { ro: "Burger Menu", ru: "Бургер-меню" }, note: { ro: "Burgerul preferat într-o combinație completă.", ru: "Любимый бургер в составе полного набора." }, items: burgerMenuItems },
-  { id: "croki-menu", number: "05", name: { ro: "Croki Menu", ru: "Croki-меню" }, note: { ro: "Gustări, hot dog, sosuri și platouri generoase.", ru: "Закуски, хот-доги, соусы и большие сеты." }, items: crokiItems },
+  { id: "croki-menu", number: "05", name: { ro: "Croki Menu", ru: "Croki-меню" }, note: { ro: "Gustări, hot dog și sosuri pentru orice poftă.", ru: "Закуски, хот-доги и соусы на любой вкус." }, items: crokiItems },
   { id: "salate", number: "06", name: { ro: "Salate", ru: "Салаты" }, note: { ro: "Alegeri proaspete și colorate.", ru: "Свежие и яркие блюда." }, items: saladItems },
   { id: "bauturi", number: "07", name: { ro: "Băuturi Răcoritoare", ru: "Напитки" }, note: { ro: "Reci, exact cum trebuie lângă ceva fierbinte.", ru: "Холодные — идеальная пара для горячих блюд." }, items: drinkItems },
 ];

@@ -85,7 +85,7 @@
 .categorySheet nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px solid #1f2119; border-left: 2px solid #1f2119; }
 .categorySheet nav a { display: flex; min-height: 52px; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-right: 2px solid #1f2119; border-bottom: 2px solid #1f2119; background: #fffaf0; font-size: 11px; font-weight: 900; text-transform: uppercase; }
 .categorySheet nav a span, .deliveryLink span { color: #d8492f; font-size: 18px; }
-.deliveryLink { display: flex; min-height: 48px; align-items: center; justify-content: space-between; margin-top: 12px; padding: 0 15px; color: #f5eddb; background: #315d43; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.deliveryLink { display: flex; min-height: 48px; align-items: center; justify-content: space-between; margin-top: 12px; padding: 0 15px; color: #1f2119; background: #f4c430; font-size: 11px; font-weight: 900; text-transform: uppercase; }
 .cartOverlay { position: absolute; inset: 0; width: 100%; border: 0; background: rgba(18, 20, 15, .65); cursor: pointer; }
 .cartDrawer { position: absolute; top: 0; right: 0; display: flex; flex-direction: column; width: min(100%, 520px); height: 100%; color: #1f2119; border-left: 3px solid #1f2119; background: #f5eddb; box-shadow: -16px 0 50px rgba(0, 0, 0, .22); }
 .cartDrawer > header { display: flex; align-items: center; justify-content: space-between; padding: 25px 28px; border-bottom: 2px solid #1f2119; background: #f4c430; }
@@ -113,8 +113,8 @@
 .checkoutLink, .callToOrder { display: flex; min-height: 58px; align-items: center; justify-content: space-between; gap: 14px; padding: 0 20px; border: 2px solid #1f2119; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; }
 .checkoutLink { color: #1f2119; background: #f4c430; box-shadow: 5px 5px 0 #d8492f; }
 .checkoutLink span { font-size: 23px; }
-.callToOrder { min-height: 48px; margin-top: 12px; color: #f5eddb; background: #315d43; }
-.callToOrder span { color: #f4c430; font-size: 11px; }
+.callToOrder { min-height: 48px; margin-top: 12px; color: #1f2119; background: #f4c430; }
+.callToOrder span { color: #d8492f; font-size: 11px; }
 
 .floatingPhone {
   position: fixed;
@@ -125,22 +125,22 @@
   width: 64px;
   height: 64px;
   place-items: center;
-  color: #fff;
+  color: #1f2119;
   border: 2px solid #1f2119;
   border-radius: 50%;
-  background: #315d43;
-  box-shadow: 5px 6px 0 rgba(31, 33, 25, .9), 0 0 0 0 rgba(49, 93, 67, .45);
+  background: #f4c430;
+  box-shadow: 5px 6px 0 rgba(31, 33, 25, .9), 0 0 0 0 rgba(244, 196, 48, .45);
   transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
   animation: phonePulse 2.8s ease-out infinite;
 }
 
 .floatingPhone svg { width: 29px; height: 29px; }
-.floatingPhone:hover { background: #254b35; transform: translateY(-4px) scale(1.04); box-shadow: 5px 10px 0 rgba(31, 33, 25, .9), 0 0 0 10px rgba(49, 93, 67, .15); }
+.floatingPhone:hover { background: #ddb020; transform: translateY(-4px) scale(1.04); box-shadow: 5px 10px 0 rgba(31, 33, 25, .9), 0 0 0 10px rgba(244, 196, 48, .15); }
 .floatingPhone:focus-visible { outline: 3px solid #f4c430; outline-offset: 4px; }
 
 @keyframes phonePulse {
-  0%, 55%, 100% { box-shadow: 5px 6px 0 rgba(31, 33, 25, .9), 0 0 0 0 rgba(49, 93, 67, .38); }
-  75% { box-shadow: 5px 6px 0 rgba(31, 33, 25, .9), 0 0 0 13px rgba(49, 93, 67, 0); }
+  0%, 55%, 100% { box-shadow: 5px 6px 0 rgba(31, 33, 25, .9), 0 0 0 0 rgba(244, 196, 48, .38); }
+  75% { box-shadow: 5px 6px 0 rgba(31, 33, 25, .9), 0 0 0 13px rgba(244, 196, 48, 0); }
 }
 
 @media (max-width: 1100px) {

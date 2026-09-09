@@ -4,7 +4,7 @@
   --paper: #fffaf0;
   --yellow: #f4c430;
   --red: #d8492f;
-  --green: #315d43;
+  --gold: #f4c430;
   min-height: 100vh;
   color: var(--ink);
   background: var(--cream);
@@ -47,15 +47,15 @@
 .tableWrap { overflow-x: auto; margin-top: 24px; border: 2px solid var(--ink); background: var(--paper); }
 .tableWrap table { width: 100%; min-width: 720px; border-collapse: collapse; }
 .tableWrap th, .tableWrap td { padding: 14px; border-right: 1px solid rgba(31, 33, 25, .25); border-bottom: 1px solid rgba(31, 33, 25, .25); text-align: left; vertical-align: top; font-size: 12px; line-height: 1.45; }
-.tableWrap th { color: var(--cream); background: var(--green); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+.tableWrap th { color: var(--ink); background: var(--gold); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
 .tableWrap th:last-child, .tableWrap td:last-child { border-right: 0; }
 .tableWrap tbody tr:last-child td { border-bottom: 0; }
 .tableWrap code { font-weight: 900; }
 
-.contactCard { display: flex; flex-direction: column; gap: 8px; margin: 22px 0; padding: 24px; color: var(--cream); border: 2px solid var(--ink); background: var(--green); box-shadow: 6px 6px 0 var(--yellow); }
-.contactCard strong { color: var(--yellow); font-size: 19px; text-transform: uppercase; }
+.contactCard { display: flex; flex-direction: column; gap: 8px; margin: 22px 0; padding: 24px; color: var(--ink); border: 2px solid var(--ink); background: var(--gold); box-shadow: 6px 6px 0 var(--red); }
+.contactCard strong { color: var(--red); font-size: 19px; text-transform: uppercase; }
 .contactCard a { width: fit-content; font-size: 24px; font-weight: 950; }
-.contactCard span { color: #d9e0d5; font-size: 13px; }
+.contactCard span { color: #555349; font-size: 13px; }
 
 .footer { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 40px; margin-bottom: 72px; padding: 42px max(32px, calc((100% - 1280px) / 2)); color: var(--cream); background: var(--ink); }
 .footer img { width: 135px; height: auto; }

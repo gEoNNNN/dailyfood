@@ -4,7 +4,7 @@
   --paper: #fffaf0;
   --yellow: #f4c430;
   --red: #d8492f;
-  --green: #315d43;
+  --gold: #f4c430;
   min-height: 100vh;
   color: var(--ink);
   background: var(--cream);
@@ -42,24 +42,24 @@
 .heroCopy > p { max-width: 650px; margin-top: 28px; color: #625f55; font-size: 17px; font-weight: 600; line-height: 1.65; }
 .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
 .primaryButton, .phoneButton, .lightButton { display: flex; min-height: 58px; align-items: center; justify-content: space-between; gap: 26px; padding: 0 20px; border: 2px solid var(--ink); font-size: 11px; font-weight: 950; text-transform: uppercase; letter-spacing: .045em; transition: transform .18s ease, box-shadow .18s ease; }
-.primaryButton { min-width: 210px; color: var(--cream); background: var(--green); box-shadow: 6px 6px 0 var(--yellow); }
-.primaryButton span { color: var(--yellow); font-size: 20px; }
+.primaryButton { min-width: 210px; color: var(--ink); background: var(--gold); box-shadow: 6px 6px 0 var(--red); }
+.primaryButton span { color: var(--red); font-size: 20px; }
 .phoneButton { background: var(--paper); }
 .primaryButton:hover, .phoneButton:hover, .lightButton:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--red); }
 
-.heroPanel { border: 2px solid var(--ink); background: var(--paper); box-shadow: 10px 10px 0 var(--green); transform: rotate(1deg); }
+.heroPanel { border: 2px solid var(--ink); background: var(--paper); box-shadow: 10px 10px 0 var(--gold); transform: rotate(1deg); }
 .heroPanel > div { position: relative; min-height: 128px; padding: 27px 28px 24px 74px; border-bottom: 2px solid var(--ink); }
 .heroPanel > div:last-child { border-bottom: 0; }
 .heroPanel div > span { position: absolute; top: 27px; left: 24px; display: grid; width: 32px; height: 32px; place-items: center; color: var(--cream); background: var(--red); font-size: 9px; font-weight: 950; transform: rotate(-5deg); }
 .heroPanel p { margin-bottom: 9px; color: #777268; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
 .heroPanel strong { font-size: clamp(21px, 2.3vw, 31px); font-weight: 950; line-height: 1.05; text-transform: uppercase; letter-spacing: -.04em; }
 
-.freeBanner { position: relative; display: grid; grid-template-columns: 1fr 1fr auto; gap: 44px; align-items: center; padding: 48px max(32px, calc((100% - 1280px) / 2)); overflow: hidden; color: var(--cream); background: var(--green); }
-.freeBanner > div > span { color: var(--yellow); font-size: 10px; font-weight: 950; text-transform: uppercase; letter-spacing: .13em; }
+.freeBanner { position: relative; display: grid; grid-template-columns: 1fr 1fr auto; gap: 44px; align-items: center; padding: 48px max(32px, calc((100% - 1280px) / 2)); overflow: hidden; color: var(--ink); background: var(--gold); }
+.freeBanner > div > span { color: var(--red); font-size: 10px; font-weight: 950; text-transform: uppercase; letter-spacing: .13em; }
 .freeBanner h2 { max-width: 540px; margin-top: 9px; font-size: clamp(28px, 3.3vw, 47px); font-weight: 950; line-height: .95; text-transform: uppercase; letter-spacing: -.045em; }
 .freeBanner > p { max-width: 530px; font-size: 13px; font-weight: 600; line-height: 1.65; opacity: .85; }
-.freeBanner > strong { color: var(--yellow); font-size: clamp(58px, 7vw, 98px); font-weight: 950; line-height: .8; letter-spacing: -.07em; white-space: nowrap; }
-.freeBanner > strong small { display: block; margin-top: 8px; color: var(--cream); font-size: 12px; text-align: right; letter-spacing: .14em; }
+.freeBanner > strong { color: var(--red); font-size: clamp(58px, 7vw, 98px); font-weight: 950; line-height: .8; letter-spacing: -.07em; white-space: nowrap; }
+.freeBanner > strong small { display: block; margin-top: 8px; color: var(--ink); font-size: 12px; text-align: right; letter-spacing: .14em; }
 
 .processSection, .pricesSection { width: min(100% - 64px, 1280px); margin: 0 auto; padding: 100px 0; }
 .sectionHeading { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 42px; border-bottom: 2px solid var(--ink); }
@@ -89,10 +89,10 @@
 .standardCard .priceList { display: grid; grid-template-columns: repeat(2, 1fr); }
 .standardCard .priceHead { grid-column: 1 / -1; }
 .standardCard .priceRow:nth-child(even) { border-right: 1px solid #bcb5a5; }
-.cardTitle { display: flex; min-height: 120px; gap: 18px; align-items: flex-start; padding: 25px 27px; color: var(--cream); background: var(--green); }
-.reducedCard .cardTitle { background: var(--red); }
+.cardTitle { display: flex; min-height: 120px; gap: 18px; align-items: flex-start; padding: 25px 27px; color: var(--ink); background: var(--gold); }
+.reducedCard .cardTitle { color: var(--cream); background: var(--red); }
 .suburbCard .cardTitle { color: var(--ink); background: var(--yellow); }
-.cardTitle > span { display: grid; min-width: 36px; height: 36px; place-items: center; color: var(--ink); background: var(--yellow); font-size: 9px; font-weight: 950; transform: rotate(-5deg); }
+.cardTitle > span { display: grid; min-width: 36px; height: 36px; place-items: center; color: var(--cream); background: var(--red); font-size: 9px; font-weight: 950; transform: rotate(-5deg); }
 .suburbCard .cardTitle > span { color: var(--cream); background: var(--red); }
 .cardTitle h3 { font-size: 22px; font-weight: 950; line-height: 1; text-transform: uppercase; letter-spacing: -.035em; }
 .cardTitle p { max-width: 520px; margin-top: 8px; font-size: 12px; font-weight: 600; line-height: 1.45; opacity: .8; }
@@ -103,7 +103,7 @@
 .priceRow strong { color: var(--red); font-size: 14px; }
 
 .checkSection { display: flex; width: min(100% - 64px, 1280px); gap: 27px; align-items: center; margin: 0 auto 100px; padding: 36px; border: 2px solid var(--ink); background: var(--yellow); box-shadow: 9px 9px 0 var(--red); }
-.checkSection > span { display: grid; min-width: 62px; height: 62px; place-items: center; color: var(--cream); background: var(--green); font-size: 28px; font-weight: 950; transform: rotate(-4deg); }
+.checkSection > span { display: grid; min-width: 62px; height: 62px; place-items: center; color: var(--cream); background: var(--red); font-size: 28px; font-weight: 950; transform: rotate(-4deg); }
 .checkSection h2 { font-size: clamp(23px, 3vw, 38px); font-weight: 950; text-transform: uppercase; letter-spacing: -.045em; }
 .checkSection p { max-width: 900px; margin-top: 9px; font-size: 13px; font-weight: 650; line-height: 1.6; }
 
@@ -146,7 +146,7 @@
   .heroCopy > p { font-size: 14px; }
   .actions { flex-direction: column; }
   .primaryButton, .phoneButton, .lightButton { width: 100%; }
-  .heroPanel { grid-template-columns: 1fr; box-shadow: 6px 6px 0 var(--green); }
+  .heroPanel { grid-template-columns: 1fr; box-shadow: 6px 6px 0 var(--gold); }
   .heroPanel > div { min-height: 108px; padding: 24px 22px 22px 67px; border-right: 0; border-bottom: 2px solid var(--ink); }
   .heroPanel > div:last-child { border-bottom: 0; }
   .heroPanel div > span { top: 23px; left: 20px; }
