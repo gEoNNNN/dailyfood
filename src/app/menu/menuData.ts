@@ -141,8 +141,8 @@ const kebabMenuItems: MenuProduct[] = [
   product("combo-efes-kebab-porc", "Combo Efes Kebab de Porc", "Комбо Efes с кебабом из свинины", 150, comboPorc, { ro: "Kebab Porc, cartofi pai, sos, Efes 0.5l la alegere", ru: "Кебаб со свининой, картофель фри, соус, Efes 0,5 л на выбор" }, undefined, "contain"),
   product("daily-falafel-kebab-meniu", "Daily Falafel Kebab Meniu", "Меню Daily Falafel Kebab", 130, falafelKebabMeniu, { ro: "Daily Falafel Kebab, cartofi pai, sos, băutură 0.5l", ru: "Daily Falafel Kebab, картофель фри, соус, напиток 0,5 л" }, tag("Veggie", "Вегетарианский"), "contain"),
   product("daily-kebab-de-post-meniu", "Daily Kebab de Post Meniu", "Меню с постным Daily Kebab", 130, kebabVeggieMeniu, { ro: "Daily Kebab de post, cartofi pai, sos, băutură 0.5l", ru: "Постный Daily Kebab, картофель фри, соус, напиток 0,5 л" }, tag("De post", "Постный")),
-  product("doi-kebab-pui-cartofi", "2 Kebab de Pui + Cartofi Pai", "2 кебаба с курицей + картофель фри", 125, kebabPuiCartofi, descriptions.kebabMenu, tag("Combo", "Комбо")),
-  product("combo-trei-kebab-efes", "Combo 3 Kebab + 3 Efes", "Комбо 3 кебаба + 3 Efes", 245, comboTreiKebabEfes, descriptions.kebabMenu, tag("De împărțit", "Для компании"), "contain"),
+  product("doi-kebab-pui-cartofi", "2 Kebab de Pui + Cartofi Pai", "2 кебаба с курицей + картофель фри", 180, kebabPuiCartofi, descriptions.kebabMenu, tag("Combo", "Комбо")),
+  product("combo-trei-kebab-efes", "Combo 3 Kebab + 3 Efes", "Комбо 3 кебаба + 3 Efes", 330, comboTreiKebabEfes, descriptions.kebabMenu, tag("De împărțit", "Для компании"), "contain"),
 ];
 
 const burgerMenuItems: MenuProduct[] = [
