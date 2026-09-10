@@ -62,6 +62,7 @@ import porkBeefBurgerMeniu from "../../meniu/pork beef burger meniu.jpg";
 import porkBeefBurger from "../../meniu/pork beef burger.jpg";
 import porkTray from "../../meniu/pork tray.jpg";
 import promo2Burger from "../../meniu/2xburger.jpg";
+import promo2American from "../../meniu/2xamerican.png";
 import promo2KebabAripioare from "../../meniu/2xkebabaripioare.png";
 import promo3Kebab from "../../meniu/3xkebab.png";
 import promo5Kebab from "../../meniu/5xkebab.png";
@@ -164,7 +165,7 @@ const promotionItems: MenuProduct[] = [
   product("doi-kebab-pui-cartofi", "2 Kebab de Pui + Cartofi Pai", "2 кебаба с курицей + картофель фри", 180, kebabPuiCartofi, { ro: "2 Kebab de Pui și 1 porție de cartofi pai.", ru: "2 кебаба с курицей и 1 порция картофеля фри." }, tag("Promo", "Промо")),
   product("promo-trei-kebab-cola", "3 Kebab de Pui + 3 Coca-Cola", "3 кебаба с курицей + 3 Coca-Cola", 300, promo3Kebab, { ro: "3 Kebab de Pui și 3 Coca-Cola 0.5l.", ru: "3 кебаба с курицей и 3 Coca-Cola 0,5 л." }, tag("Promo", "Промо"), "contain"),
   product("promo-doi-big-pork-beef", "2 Big Pork-Beef Burger + Cartofi", "2 Big Pork-Beef Burger + картофель", 200, promo2Burger, { ro: "2 Big Pork-Beef Burger și 1 porție de cartofi pai.", ru: "2 Big Pork-Beef Burger и 1 порция картофеля фри." }, tag("Promo", "Промо"), "contain"),
-  product("promo-doi-american-burger", "2 American Burger + Cartofi", "2 American Burger + картофель", 170, promo2Burger, { ro: "2 American Burger și 1 porție de cartofi pai.", ru: "2 American Burger и 1 порция картофеля фри." }, tag("Promo", "Промо"), "contain"),
+  product("promo-doi-american-burger", "2 American Burger + Cartofi", "2 American Burger + картофель", 170, promo2American, { ro: "2 American Burger și 1 porție de cartofi pai.", ru: "2 American Burger и 1 порция картофеля фри." }, tag("Promo", "Промо"), "contain"),
   product("promo-cinci-kebab-cola", "5 Kebab de Pui + 5 Coca-Cola", "5 кебабов с курицей + 5 Coca-Cola", 485, promo5Kebab, { ro: "5 Kebab de Pui și 5 Coca-Cola 0.5l.", ru: "5 кебабов с курицей и 5 Coca-Cola 0,5 л." }, tag("Promo", "Промо"), "contain"),
   product("combo-trei-kebab-efes", "Combo 3 Kebab + 3 Efes", "Комбо 3 кебаба + 3 Efes", 330, comboTreiKebabEfes, { ro: "3 Kebab de Pui și 3 Efes 0.5l.", ru: "3 кебаба с курицей и 3 Efes 0,5 л." }, tag("Promo", "Промо"), "contain"),
 ];
