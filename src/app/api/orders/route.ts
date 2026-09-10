@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     return json({ error: "invalid_customer_details" }, 400);
   }
 
-  if (!Array.isArray(body.items) || body.items.length < 1 || body.items.length > 30) {
+  if (!Array.isArray(body.items) || body.items.length < 1 || body.items.length > 100) {
     return json({ error: "invalid_items" }, 400);
   }
 
