@@ -11,6 +11,7 @@ const categories = [
   { id: "burger", ro: "Burger", ru: "Бургер" },
   { id: "kebab-menu", ro: "Kebab Menu", ru: "Кебаб-меню" },
   { id: "burger-menu", ro: "Burger Menu", ru: "Бургер-меню" },
+  { id: "promotii", ro: "Promoții", ru: "Акции" },
   { id: "croki-menu", ro: "Croki Menu", ru: "Croki-меню" },
   { id: "salate", ro: "Salate", ru: "Салаты" },
   { id: "bauturi", ro: "Băuturi", ru: "Напитки" },

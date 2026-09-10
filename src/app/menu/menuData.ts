@@ -61,13 +61,16 @@ import nuggets from "../../meniu/nuggets.jpg";
 import porkBeefBurgerMeniu from "../../meniu/pork beef burger meniu.jpg";
 import porkBeefBurger from "../../meniu/pork beef burger.jpg";
 import porkTray from "../../meniu/pork tray.jpg";
-import promoBigBeef from "../../meniu/promo 2bigbeef plus cartofi.jpeg";
+import promo2Burger from "../../meniu/2xburger.jpg";
+import promo2KebabAripioare from "../../meniu/2xkebabaripioare.png";
+import promo3Kebab from "../../meniu/3xkebab.png";
+import promo5Kebab from "../../meniu/5xkebab.png";
 import sosBurger from "../../meniu/sos burger.jpg";
 import sosUsturoi from "../../meniu/sos usturoi.jpg";
 import specialBurgerMeniu from "../../meniu/special burger meniu.png";
 
 export type Language = "ro" | "ru";
-export type CategoryId = "kebab" | "burger" | "kebab-menu" | "burger-menu" | "croki-menu" | "salate" | "bauturi";
+export type CategoryId = "kebab" | "burger" | "kebab-menu" | "burger-menu" | "promotii" | "croki-menu" | "salate" | "bauturi";
 export type LocalizedText = Record<Language, string>;
 
 export type MenuProduct = {
@@ -141,8 +144,6 @@ const kebabMenuItems: MenuProduct[] = [
   product("combo-efes-kebab-porc", "Combo Efes Kebab de Porc", "Комбо Efes с кебабом из свинины", 150, comboPorc, { ro: "Kebab Porc, cartofi pai, sos, Efes 0.5l la alegere", ru: "Кебаб со свининой, картофель фри, соус, Efes 0,5 л на выбор" }, undefined, "contain"),
   product("daily-falafel-kebab-meniu", "Daily Falafel Kebab Meniu", "Меню Daily Falafel Kebab", 130, falafelKebabMeniu, { ro: "Daily Falafel Kebab, cartofi pai, sos, băutură 0.5l", ru: "Daily Falafel Kebab, картофель фри, соус, напиток 0,5 л" }, tag("Veggie", "Вегетарианский"), "contain"),
   product("daily-kebab-de-post-meniu", "Daily Kebab de Post Meniu", "Меню с постным Daily Kebab", 130, kebabVeggieMeniu, { ro: "Daily Kebab de post, cartofi pai, sos, băutură 0.5l", ru: "Постный Daily Kebab, картофель фри, соус, напиток 0,5 л" }, tag("De post", "Постный")),
-  product("doi-kebab-pui-cartofi", "2 Kebab de Pui + Cartofi Pai", "2 кебаба с курицей + картофель фри", 180, kebabPuiCartofi, descriptions.kebabMenu, tag("Combo", "Комбо")),
-  product("combo-trei-kebab-efes", "Combo 3 Kebab + 3 Efes", "Комбо 3 кебаба + 3 Efes", 330, comboTreiKebabEfes, descriptions.kebabMenu, tag("De împărțit", "Для компании"), "contain"),
 ];
 
 const burgerMenuItems: MenuProduct[] = [
@@ -155,7 +156,17 @@ const burgerMenuItems: MenuProduct[] = [
   product("bacon-burger-meniu", "Bacon Burger Menu", "Меню с бургером с беконом", 120, baconBurgerMeniu, { ro: "Bacon Burger, cartofi pai, sos, băutură 0.5l (Coca-Cola/Fanta/Sprite/Dorna)", ru: "Бургер с беконом, картофель фри, соус, напиток 0,5 л (Coca-Cola/Fanta/Sprite/Dorna)" }),
   product("american-burger-meniu", "American Burger Menu", "Меню с американским бургером", 115, americanBurgerMeniu, { ro: "American Burger, cartofi pai, sos, băutură 0.5l (Coca-Cola/Fanta/Sprite/Dorna)", ru: "Американский бургер, картофель фри, соус, напиток 0,5 л (Coca-Cola/Fanta/Sprite/Dorna)" }),
   product("pork-beef-burger-meniu", "Pork-Beef Burger Menu", "Меню с бургером со свининой и говядиной", 120, porkBeefBurgerMeniu, { ro: "Pork-Beef Burger, cartofi pai, sos, băutură 0.5l (Coca-Cola/Fanta/Sprite/Dorna)", ru: "Бургер со свининой и говядиной, картофель фри, соус, напиток 0,5 л (Coca-Cola/Fanta/Sprite/Dorna)" }),
-  product("promo-doi-big-beef", "Promo 2 Big Beef + Cartofi", "Промо 2 Big Beef + картофель", 165, promoBigBeef, descriptions.burgerMenu, tag("Promo", "Промо")),
+];
+
+const promotionItems: MenuProduct[] = [
+  product("promo-trei-kebab-cartofi", "3 Kebab de Pui + Cartofi Pai", "3 кебаба с курицей + картофель фри", 250, promo3Kebab, { ro: "3 Kebab de Pui și 1 porție de cartofi pai.", ru: "3 кебаба с курицей и 1 порция картофеля фри." }, tag("Promo", "Промо"), "contain"),
+  product("promo-doi-kebab-aripioare", "Combo pentru Doi", "Комбо для двоих", 240, promo2KebabAripioare, { ro: "2 Kebab de Pui, cartofi pai, sos și aripioare BBQ sau Chilli.", ru: "2 кебаба с курицей, картофель фри, соус и крылышки BBQ или Chilli." }, tag("Promo", "Промо"), "contain"),
+  product("doi-kebab-pui-cartofi", "2 Kebab de Pui + Cartofi Pai", "2 кебаба с курицей + картофель фри", 180, kebabPuiCartofi, { ro: "2 Kebab de Pui și 1 porție de cartofi pai.", ru: "2 кебаба с курицей и 1 порция картофеля фри." }, tag("Promo", "Промо")),
+  product("promo-trei-kebab-cola", "3 Kebab de Pui + 3 Coca-Cola", "3 кебаба с курицей + 3 Coca-Cola", 300, promo3Kebab, { ro: "3 Kebab de Pui și 3 Coca-Cola 0.5l.", ru: "3 кебаба с курицей и 3 Coca-Cola 0,5 л." }, tag("Promo", "Промо"), "contain"),
+  product("promo-doi-big-pork-beef", "2 Big Pork-Beef Burger + Cartofi", "2 Big Pork-Beef Burger + картофель", 200, promo2Burger, { ro: "2 Big Pork-Beef Burger și 1 porție de cartofi pai.", ru: "2 Big Pork-Beef Burger и 1 порция картофеля фри." }, tag("Promo", "Промо"), "contain"),
+  product("promo-doi-american-burger", "2 American Burger + Cartofi", "2 American Burger + картофель", 170, promo2Burger, { ro: "2 American Burger și 1 porție de cartofi pai.", ru: "2 American Burger и 1 порция картофеля фри." }, tag("Promo", "Промо"), "contain"),
+  product("promo-cinci-kebab-cola", "5 Kebab de Pui + 5 Coca-Cola", "5 кебабов с курицей + 5 Coca-Cola", 485, promo5Kebab, { ro: "5 Kebab de Pui și 5 Coca-Cola 0.5l.", ru: "5 кебабов с курицей и 5 Coca-Cola 0,5 л." }, tag("Promo", "Промо"), "contain"),
+  product("combo-trei-kebab-efes", "Combo 3 Kebab + 3 Efes", "Комбо 3 кебаба + 3 Efes", 330, comboTreiKebabEfes, { ro: "3 Kebab de Pui și 3 Efes 0.5l.", ru: "3 кебаба с курицей и 3 Efes 0,5 л." }, tag("Promo", "Промо"), "contain"),
 ];
 
 const crokiItems: MenuProduct[] = [
@@ -202,7 +213,8 @@ export const menuCategories: MenuCategory[] = [
   { id: "burger", number: "02", name: { ro: "Burger", ru: "Бургеры" }, note: { ro: "Burgeri generoși, făcuți la comandă.", ru: "Сытные бургеры, приготовленные на заказ." }, items: burgerItems },
   { id: "kebab-menu", number: "03", name: { ro: "Kebab Menu", ru: "Кебаб-меню" }, note: { ro: "Combinații complete cu kebabul preferat.", ru: "Полные наборы с любимым кебабом." }, items: kebabMenuItems },
   { id: "burger-menu", number: "04", name: { ro: "Burger Menu", ru: "Бургер-меню" }, note: { ro: "Burgerul preferat într-o combinație completă.", ru: "Любимый бургер в составе полного набора." }, items: burgerMenuItems },
-  { id: "croki-menu", number: "05", name: { ro: "Croki Menu", ru: "Croki-меню" }, note: { ro: "Gustări, hot dog și sosuri pentru orice poftă.", ru: "Закуски, хот-доги и соусы на любой вкус." }, items: crokiItems },
-  { id: "salate", number: "06", name: { ro: "Salate", ru: "Салаты" }, note: { ro: "Alegeri proaspete și colorate.", ru: "Свежие и яркие блюда." }, items: saladItems },
-  { id: "bauturi", number: "07", name: { ro: "Băuturi Răcoritoare", ru: "Напитки" }, note: { ro: "Reci, exact cum trebuie lângă ceva fierbinte.", ru: "Холодные — идеальная пара для горячих блюд." }, items: drinkItems },
+  { id: "promotii", number: "05", name: { ro: "Promoții", ru: "Акции" }, note: { ro: "Combo-uri avantajoase pentru familie și prieteni.", ru: "Выгодные комбо для семьи и друзей." }, items: promotionItems },
+  { id: "croki-menu", number: "06", name: { ro: "Croki Menu", ru: "Croki-меню" }, note: { ro: "Gustări, hot dog și sosuri pentru orice poftă.", ru: "Закуски, хот-доги и соусы на любой вкус." }, items: crokiItems },
+  { id: "salate", number: "07", name: { ro: "Salate", ru: "Салаты" }, note: { ro: "Alegeri proaspete și colorate.", ru: "Свежие и яркие блюда." }, items: saladItems },
+  { id: "bauturi", number: "08", name: { ro: "Băuturi Răcoritoare", ru: "Напитки" }, note: { ro: "Reci, exact cum trebuie lângă ceva fierbinte.", ru: "Холодные — идеальная пара для горячих блюд." }, items: drinkItems },
 ];

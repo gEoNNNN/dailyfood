@@ -3,6 +3,8 @@ import { menuCategories, type CategoryId, type MenuCategory, type MenuProduct } 
 const cacheDuration = 60_000;
 const categoryIds = new Set(menuCategories.map((category) => category.id));
 const localProducts = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
+const promotionCategory = menuCategories.find((category) => category.id === "promotii");
+const promotionIds = new Set([...(promotionCategory?.items.map((item) => item.id) ?? []), "promo-doi-big-beef"]);
 let cachedMenu: { expiresAt: number; categories: MenuCategory[] } | null = null;
 
 function parseCsv(value: string) {
@@ -48,6 +50,7 @@ function parseMenu(value: string): MenuCategory[] | null {
 
   const records = rows.map((row) => Object.fromEntries(headers.map((header, index) => [header, row[index]?.trim() ?? ""])));
   const productsByCategory = new Map<CategoryId, Array<MenuProduct & { order: number }>>();
+  const sheetCategories = new Set<CategoryId>();
   const seenIds = new Set<string>();
   let recognizedRows = 0;
   let enabledRows = 0;
@@ -55,6 +58,7 @@ function parseMenu(value: string): MenuCategory[] | null {
   for (const record of records) {
     const category = record.category as CategoryId;
     if (!/^[a-z0-9-]{2,100}$/.test(record.id) || !categoryIds.has(category) || seenIds.has(record.id)) continue;
+    sheetCategories.add(category);
     recognizedRows += 1;
     if (["false", "0", "nu", "no"].includes((record.active ?? "").toLowerCase())) continue;
     enabledRows += 1;
@@ -87,8 +91,11 @@ function parseMenu(value: string): MenuCategory[] | null {
   }
 
   if (!recognizedRows || (enabledRows && !seenIds.size)) return null;
+  const hasSheetPromotions = sheetCategories.has("promotii");
   return menuCategories.flatMap((category) => {
-    const items = productsByCategory.get(category.id)?.sort((first, second) => first.order - second.order).map((item): MenuProduct => ({ id: item.id, name: item.name, description: item.description, price: item.price, image: item.image, tag: item.tag, imageFit: item.imageFit })) ?? [];
+    if (category.id === "promotii" && !hasSheetPromotions) return [category];
+    const sheetItems = productsByCategory.get(category.id)?.sort((first, second) => first.order - second.order).map((item): MenuProduct => ({ id: item.id, name: item.name, description: item.description, price: item.price, image: item.image, tag: item.tag, imageFit: item.imageFit })) ?? [];
+    const items = hasSheetPromotions ? sheetItems : sheetItems.filter((item) => !promotionIds.has(item.id));
     return items.length ? [{ ...category, items }] : [];
   });
 }
