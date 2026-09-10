@@ -53,7 +53,6 @@ import kebabPui from "../../meniu/kebab pui.jpg";
 import kebabVeggieMeniu from "../../meniu/kebab veggie meniu.jpg";
 import kebabVeggie from "../../meniu/kebab veggie.jpg";
 import ketchup from "../../meniu/ketchuo.jpg";
-import maioneza from "../../meniu/maioneza.jpg";
 import nuggetsKebabMeniu from "../../meniu/nuggets kebab meniu.jpg";
 import nuggetsKebab from "../../meniu/nuggets kebab.jpg";
 import nuggetsTray from "../../meniu/nuggets tray.jpg";
@@ -187,7 +186,6 @@ const crokiItems: MenuProduct[] = [
   product("inele-ceapa", "Inele de Ceapă 120g", "Луковые кольца 120 г", 45, ineleCeapa, { ro: "Inele de ceapă 120g + sos", ru: "Луковые кольца 120 г + соус" }),
   product("sos-bbq", "Sos BBQ", "Соус BBQ", 12, bbq, descriptions.sauce),
   product("ketchup", "Ketchup", "Кетчуп", 10, ketchup, descriptions.sauce),
-  product("maioneza", "Maioneză", "Майонез", 10, maioneza, descriptions.sauce),
   product("sos-burger", "Sos Burger", "Бургер-соус", 12, sosBurger, descriptions.sauce),
   product("sos-usturoi", "Sos de Usturoi", "Чесночный соус", 12, sosUsturoi, descriptions.sauce),
 ];
