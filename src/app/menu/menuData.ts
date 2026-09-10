@@ -63,7 +63,7 @@ import porkTray from "../../meniu/pork tray.jpg";
 import promo2Burger from "../../meniu/2xburger.jpg";
 import promo2American from "../../meniu/2xamerican.png";
 import promo2KebabAripioare from "../../meniu/2xkebabaripioare.png";
-import promo3Kebab from "../../meniu/3xkebab.png";
+import promo3Kebab from "../../meniu/3xkebab new.jpg";
 import promo5Kebab from "../../meniu/5xkebab.png";
 import sosBurger from "../../meniu/sos burger.jpg";
 import sosUsturoi from "../../meniu/sos usturoi.jpg";
