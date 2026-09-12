@@ -44,6 +44,7 @@ export default function AdminPage() {
   const [editing, setEditing] = useState<StoredProduct | null>(null);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+  const [pendingOrders, setPendingOrders] = useState(0);
 
   const checkAuth = useCallback(async () => {
     try {
@@ -60,6 +61,20 @@ export default function AdminPage() {
     void checkAuth().then((ok) => { if (active) setAuthed(ok); });
     return () => { active = false; };
   }, [checkAuth]);
+
+  useEffect(() => {
+    if (!authed) return;
+    let active = true;
+    const poll = async () => {
+      try {
+        const res = await fetch("/api/admin/poll");
+        if (res.ok) { const data = await res.json(); if (active) setPendingOrders(data.pending ?? 0); }
+      } catch {}
+    };
+    void poll();
+    const interval = window.setInterval(poll, 5000);
+    return () => { active = false; window.clearInterval(interval); };
+  }, [authed]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -147,6 +162,12 @@ export default function AdminPage() {
       </header>
 
       {message && <div className={styles.toast}>{message}</div>}
+
+      {pendingOrders > 0 && (
+        <div className={styles.toast} style={{ background: "#fff3cd", border: "1px solid #ffeaa7" }}>
+          🔔 {pendingOrders} comandă/comenzi în așteptare. Trimite codul PIN pe Telegram pentru a le vedea.
+        </div>
+      )}
 
       {editing && (
         <form className={styles.editForm} onSubmit={handleSave}>

@@ -1,4 +1,5 @@
 import { getMenuCategories } from "../../menu/menuRepository";
+import { addPendingOrder } from "../../../lib/pendingOrders";
 
 type OrderRequest = {
   language?: unknown;
@@ -103,11 +104,15 @@ export async function POST(request: Request) {
   const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
   if (!botToken || !chatId) return json({ error: "telegram_not_configured" }, 503);
 
+  await addPendingOrder({ orderId, message, createdAt: Date.now() });
+
+  const notification = `🔔 <b>Comandă nouă în așteptare: ${orderId}</b>\n\nTrimite codul PIN pentru a vedea detaliile comenzii.`;
+
   try {
     const sendMessage = (destination: string | number) => fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: destination, text: message, parse_mode: "HTML", disable_web_page_preview: true }),
+      body: JSON.stringify({ chat_id: destination, text: notification, parse_mode: "HTML", disable_web_page_preview: true }),
       cache: "no-store",
     });
     const wait = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds));
