@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import burgerImage from "../burger.png";
 import kebabImage from "../kebab.png";
 import logoImage from "../logo.png";
@@ -88,6 +89,13 @@ function FoodArtwork({ type, language }: { type: string; language: Language }) {
   return <Image className={styles.menuFoodImage} src={burgerImage} alt={alt.burger} />;
 }
 
+function FeaturedImage({ image, alt }: { image: StaticImageData | string; alt: string }) {
+  if (typeof image === "string") {
+    return <img className={styles.menuFoodImage} src={image} alt={alt} loading="lazy" />;
+  }
+  return <Image className={styles.menuFoodImage} src={image} alt={alt} sizes="(max-width: 640px) calc(100vw - 70px), (max-width: 960px) 50vw, 420px" placeholder="blur" />;
+}
+
 export default function Home() {
   const { language } = useLanguage();
   const { items: cartItems, add } = useCart();
@@ -123,7 +131,7 @@ export default function Home() {
         <div className={styles.sectionIntro} data-reveal="up"><div><span className={styles.kicker}>{t.favoritesKicker}</span><h2>{t.favoritesTitle}</h2></div><p>{t.favoritesText}</p></div>
         <div className={styles.menuGrid}>{items.map(({ product, type, color }, index) => {
           const quantity = cartItems.find((cartItem) => cartItem.id === product.id)?.quantity ?? 0;
-          return <article className={styles.menuCard} key={product.id} data-reveal="up" data-reveal-delay={String(index + 1)}><div className={`${styles.cardVisual} ${styles[color]}`}><span>{product.tag?.[language] ?? product.name[language]}</span>{product.image ? <Image className={styles.menuFoodImage} src={product.image} alt={product.name[language]} sizes="(max-width: 640px) calc(100vw - 70px), (max-width: 960px) 50vw, 420px" placeholder={typeof product.image === "string" ? "empty" : "blur"} /> : <FoodArtwork type={type} language={language} />}</div><div className={styles.cardInfo}><div><h3>{product.name[language]}</h3><p>{product.description[language]}</p></div><strong>{product.price} MDL</strong></div><button className={styles.addButton} type="button" onClick={() => add({ id: product.id, nameRo: product.name.ro, nameRu: product.name.ru, price: product.price })}>{quantity ? `${t.added} · ${quantity}` : t.addToCart}<span>+</span></button></article>;
+          return <article className={styles.menuCard} key={product.id} data-reveal="up" data-reveal-delay={String(index + 1)}><div className={`${styles.cardVisual} ${styles[color]}`}><span>{product.tag?.[language] ?? product.name[language]}</span>{product.image ? <FeaturedImage image={product.image} alt={product.name[language]} /> : <FoodArtwork type={type} language={language} />}</div><div className={styles.cardInfo}><div><h3>{product.name[language]}</h3><p>{product.description[language]}</p></div><strong>{product.price} MDL</strong></div><button className={styles.addButton} type="button" onClick={() => add({ id: product.id, nameRo: product.name.ro, nameRu: product.name.ru, price: product.price })}>{quantity ? `${t.added} · ${quantity}` : t.addToCart}<span>+</span></button></article>;
         })}</div>
         <a className={styles.textLink} href="/menu">{t.fullMenu} <ArrowIcon /></a>
       </section>

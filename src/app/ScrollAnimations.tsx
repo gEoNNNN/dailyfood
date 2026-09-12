@@ -5,15 +5,24 @@ import { useEffect } from "react";
 export default function ScrollAnimations() {
   useEffect(() => {
     const root = document.documentElement;
-    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      elements.forEach((element) => element.classList.add("is-visible"));
-      return;
+    if (prefersReduced) {
+      const applyReduced = () => {
+        document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => el.classList.add("is-visible"));
+      };
+      applyReduced();
+      const mo = new MutationObserver(applyReduced);
+      mo.observe(document.body, { childList: true, subtree: true });
+      return () => mo.disconnect();
     }
 
     root.classList.add("has-scroll-reveal");
     const timers: number[] = [];
+
+    const observe = (element: HTMLElement) => {
+      observer.observe(element);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,10 +42,18 @@ export default function ScrollAnimations() {
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
 
-    elements.forEach((element) => observer.observe(element));
+    const scan = () => {
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)").forEach((el) => observe(el));
+    };
+
+    scan();
+
+    const mo = new MutationObserver(() => scan());
+    mo.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       observer.disconnect();
+      mo.disconnect();
       timers.forEach((timer) => window.clearTimeout(timer));
       root.classList.remove("has-scroll-reveal");
     };

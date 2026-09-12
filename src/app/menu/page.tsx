@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import Link from "next/link";
 import logoImage from "../../logo.png";
 import { useCart } from "../CartProvider";
@@ -18,6 +19,13 @@ const text = {
 
 function ArrowIcon() {
   return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
+function ProductImage({ image, imageFit, alt }: { image: StaticImageData | string; imageFit?: "cover" | "contain"; alt: string }) {
+  if (typeof image === "string") {
+    return <img className={imageFit === "contain" ? styles.containImage : undefined} src={image} alt={alt} loading="lazy" />;
+  }
+  return <Image className={imageFit === "contain" ? styles.containImage : undefined} src={image} alt={alt} sizes="(max-width: 640px) calc((100vw - 30px) / 2), (max-width: 960px) 50vw, 425px" placeholder="blur" />;
 }
 
 export default function MenuPage() {
@@ -49,7 +57,7 @@ export default function MenuPage() {
                 return (
                   <article className={styles.item} key={item.id} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
                     <div className={styles.itemVisual}>
-                      {item.image ? <Image className={item.imageFit === "contain" ? styles.containImage : undefined} src={item.image} alt={`${localizedName} — ${String(t.productPhoto)}`} sizes="(max-width: 640px) calc((100vw - 30px) / 2), (max-width: 960px) 50vw, 425px" placeholder={typeof item.image === "string" ? "empty" : "blur"} /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
+                      {item.image ? <ProductImage image={item.image} imageFit={item.imageFit} alt={`${localizedName} — ${String(t.productPhoto)}`} /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
                       {item.tag && <span className={styles.itemTag}>{item.tag[currentLanguage]}</span>}
                     </div>
                     <div className={styles.itemBody}>

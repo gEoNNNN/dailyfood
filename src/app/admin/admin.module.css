@@ -1,0 +1,236 @@
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1a1a1a;
+}
+
+.loginCard {
+  max-width: 360px;
+  margin: 80px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.loginCard h1 {
+  margin: 0 0 24px;
+  font-size: 1.4rem;
+}
+
+.loginCard form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loginCard input {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.loginCard button {
+  padding: 10px;
+  background: #f5a623;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.loginCard button:disabled {
+  opacity: 0.5;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+}
+
+.headerActions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.headerActions button:first-child {
+  background: #f5a623;
+  color: #fff;
+}
+
+.headerActions button:last-child {
+  background: #eee;
+  color: #333;
+}
+
+.toast {
+  padding: 10px 16px;
+  background: #d4edda;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.editForm {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.editForm h2 {
+  margin: 0 0 16px;
+  font-size: 1.2rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.formGrid label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.formGrid label span {
+  font-weight: 600;
+  color: #555;
+}
+
+.formGrid input,
+.formGrid select,
+.formGrid textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.formGrid input:disabled {
+  background: #f5f5f5;
+  color: #888;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.checkbox {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.formActions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.formActions button:first-child {
+  background: #f5a623;
+  color: #fff;
+}
+
+.formActions button:last-child {
+  background: #eee;
+  color: #333;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 2px solid #e0e0e0;
+  font-weight: 600;
+  color: #555;
+}
+
+.table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.inactive {
+  opacity: 0.5;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.actions button {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #e8e8e8;
+}
+
+.deleteBtn {
+  background: #fee !important;
+  color: #c00 !important;
+}
+
+.error {
+  color: #c00;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .table {
+    font-size: 0.75rem;
+  }
+}
