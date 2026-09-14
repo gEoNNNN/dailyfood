@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import Link from "next/link";
 import logoImage from "../../logo.png";
+import { useViewItemTracking } from "../../lib/ecommerceTracking";
 import { useCart } from "../CartProvider";
 import LanguageSwitch from "../LanguageSwitch";
 import ScrollAnimations from "../ScrollAnimations";
@@ -32,6 +33,7 @@ export default function MenuPage() {
   const { language } = useLanguage();
   const { items: cartItems, add } = useCart();
   const menuCategories = useMenuCategories();
+  useViewItemTracking(menuCategories);
   const currentLanguage: Language = language;
   const t = text[currentLanguage];
 
@@ -55,7 +57,7 @@ export default function MenuPage() {
                 const quantity = cartItems.find((cartItem) => cartItem.id === item.id)?.quantity ?? 0;
                 const localizedName = item.name[currentLanguage];
                 return (
-                  <article className={styles.item} key={item.id} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
+                  <article className={styles.item} key={item.id} data-ecommerce-product-id={item.id} data-reveal="right" data-reveal-delay={String((itemIndex % 3) + 1)}>
                     <div className={styles.itemVisual}>
                       {item.image ? <ProductImage image={item.image} imageFit={item.imageFit} alt={`${localizedName} — ${String(t.productPhoto)}`} /> : <div className={styles.itemPlaceholder}><span>Daily</span><b>{t.noPhoto}</b></div>}
                       {item.tag && <span className={styles.itemTag}>{item.tag[currentLanguage]}</span>}
@@ -63,7 +65,7 @@ export default function MenuPage() {
                     <div className={styles.itemBody}>
                       <h3>{localizedName}</h3>
                       <p>{item.description[currentLanguage]}</p>
-                      <div className={styles.itemOrder}><strong>{item.price} MDL</strong><button type="button" onClick={() => add({ id: item.id, nameRo: item.name.ro, nameRu: item.name.ru, price: item.price })}>{quantity ? `${String(t.added)} · ${quantity}` : t.addToCart}</button></div>
+                      <div className={styles.itemOrder}><strong>{item.price} MDL</strong><button type="button" onClick={() => add({ id: item.id, nameRo: item.name.ro, nameRu: item.name.ru, price: item.price, itemCategory: category.name.ro })}>{quantity ? `${String(t.added)} · ${quantity}` : t.addToCart}</button></div>
                     </div>
                   </article>
                 );

@@ -1,5 +1,5 @@
-import { getPendingOrders, removePendingOrder } from "../../../lib/pendingOrders";
-import { verifySessionToken, getSessionCookieName } from "../../../lib/auth";
+import { getPendingOrders, removePendingOrder } from "../../../../lib/pendingOrders";
+import { verifySessionToken, getSessionCookieName } from "../../../../lib/auth";
 
 const TELEGRAM_API = "https://api.telegram.org/bot";
 

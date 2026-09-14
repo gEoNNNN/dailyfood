@@ -20,7 +20,7 @@ const deliveryOptions = {
   pickup: { label: "Ridicare din local / Самовывоз", fee: 0, requiresAddress: false },
   botanica: { label: "Botanica / Ботаника", fee: 50, requiresAddress: true },
   "centru-telecentru": { label: "Centru / Telecentru", fee: 60, requiresAddress: true },
-  "suburbii-apropiate": { label: "Codru / Băcioi / Bîc / Bubuieci", fee: 70, requiresAddress: true },
+  "suburbii-apropiate": { label: "Codru / Băcioi / Bubuieci", fee: 70, requiresAddress: true },
   singera: { label: "Sîngera / Сынжера", fee: 90, requiresAddress: true },
 } as const;
 
@@ -78,6 +78,7 @@ export async function POST(request: Request) {
 
   const menuCategories = await getMenuCategories();
   const products = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
+  const productCategories = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, category.name.ro] as const)));
   const orderItems = (body.items as RequestedItem[]).map((requested) => {
     const id = text(requested.id, 100);
     const quantity = typeof requested.quantity === "number" && Number.isInteger(requested.quantity) ? requested.quantity : 0;
@@ -140,7 +141,24 @@ export async function POST(request: Request) {
     }
 
     if (!telegramResponse?.ok) return json({ error: "telegram_delivery_failed" }, 502);
-    return json({ ok: true, orderId });
+    return json({
+      ok: true,
+      orderId,
+      purchase: {
+        transaction_id: orderId,
+        value: grandTotal,
+        tax: 0,
+        shipping: deliveryFee,
+        currency: "MDL",
+        items: validItems.map(({ product, quantity }) => ({
+          item_id: product.id,
+          item_name: product.name.ro,
+          item_category: productCategories.get(product.id),
+          price: product.price,
+          quantity,
+        })),
+      },
+    });
   } catch {
     return json({ error: "telegram_unavailable" }, 502);
   }

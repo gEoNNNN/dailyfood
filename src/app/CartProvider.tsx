@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore } from "react";
+import { trackAddToCart } from "../lib/ecommerceTracking";
 import type { MenuCategory } from "./menu/menuData";
 
 export type CartItem = {
@@ -8,6 +9,7 @@ export type CartItem = {
   nameRo: string;
   nameRu: string;
   price: number;
+  itemCategory?: string;
   quantity: number;
 };
 
@@ -76,10 +78,10 @@ export default function CartProvider({ children }: { children: React.ReactNode }
         const response = await fetch("/api/menu");
         if (!response.ok || !active) return;
         const categories = await response.json() as MenuCategory[];
-        const products = new Map(categories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
+        const products = new Map(categories.flatMap((category) => category.items.map((item) => [item.id, { product: item, category: category.name.ro }] as const)));
         updateCart((current) => current.flatMap((item) => {
-          const product = products.get(item.id);
-          return product ? [{ ...item, nameRo: product.name.ro, nameRu: product.name.ru, price: product.price }] : [];
+          const match = products.get(item.id);
+          return match ? [{ ...item, nameRo: match.product.name.ro, nameRu: match.product.name.ru, price: match.product.price, itemCategory: match.category }] : [];
         }));
       } catch {}
     }
@@ -87,11 +89,18 @@ export default function CartProvider({ children }: { children: React.ReactNode }
     return () => { active = false; };
   }, []);
 
-  const add = useCallback((item: NewCartItem) => updateCart((current) => {
-    const existing = current.find((entry) => entry.id === item.id);
-    return existing ? current.map((entry) => entry.id === item.id ? { ...entry, quantity: entry.quantity + 1 } : entry) : [...current, { ...item, quantity: 1 }];
-  }), []);
-  const increment = useCallback((id: string) => updateCart((current) => current.map((item) => item.id === id ? { ...item, quantity: item.quantity + 1 } : item)), []);
+  const add = useCallback((item: NewCartItem) => {
+    trackAddToCart({ ...item, quantity: 1 });
+    updateCart((current) => {
+      const existing = current.find((entry) => entry.id === item.id);
+      return existing ? current.map((entry) => entry.id === item.id ? { ...entry, quantity: entry.quantity + 1 } : entry) : [...current, { ...item, quantity: 1 }];
+    });
+  }, []);
+  const increment = useCallback((id: string) => {
+    const item = parseItems(getSnapshot()).find((entry) => entry.id === id);
+    if (item) trackAddToCart(item);
+    updateCart((current) => current.map((entry) => entry.id === id ? { ...entry, quantity: entry.quantity + 1 } : entry));
+  }, []);
   const decrement = useCallback((id: string) => updateCart((current) => current.flatMap((item) => item.id !== id ? [item] : item.quantity > 1 ? [{ ...item, quantity: item.quantity - 1 }] : [])), []);
   const remove = useCallback((id: string) => updateCart((current) => current.filter((item) => item.id !== id)), []);
   const clear = useCallback(() => updateCart(() => []), []);

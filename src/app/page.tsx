@@ -6,6 +6,7 @@ import burgerImage from "../burger.png";
 import kebabImage from "../kebab.png";
 import logoImage from "../logo.png";
 import nuggetsImage from "../nuggets.png";
+import { useViewItemTracking } from "../lib/ecommerceTracking";
 import { useCart } from "./CartProvider";
 import LanguageSwitch from "./LanguageSwitch";
 import ScrollAnimations from "./ScrollAnimations";
@@ -59,7 +60,7 @@ const faqs = {
   ro: [
     ["Ce găsesc în meniul Daily Kebab?", "Meniul include kebaburi, burgeri, meniuri combo, hot dog, gustări, salate, sosuri și băuturi. Produsele și prețurile actuale sunt afișate în pagina Meniu."],
     ["Aveți opțiuni vegetariene sau de post?", "Da. Poți alege Daily Falafel Kebab, Daily Kebab de Post și variantele lor de meniu, precum și Salata Grecească."],
-    ["În ce zone livrați?", "Livrăm în Botanica, Centru și Telecentru, precum și în Codru, Băcioi, Bîc, Sîngera și Bubuieci. Tariful depinde de zona selectată."],
+    ["În ce zone livrați?", "Livrăm în Botanica, Centru și Telecentru, precum și în Codru, Băcioi, Sîngera și Bubuieci. Tariful depinde de zona selectată."],
     ["Care este comanda minimă și când livrarea este gratuită?", "Comanda minimă pentru livrare este de 130 MDL. Livrarea în oraș este gratuită pentru comenzile de minimum 500 MDL, iar ridicarea din local este gratuită."],
     ["Cum plasez și achit o comandă?", "Adaugă produsele în coș și finalizează comanda online sau sună la +373 79 199 299. Comanda online devine valabilă după confirmarea telefonică și poate fi achitată curierului în numerar sau cu cardul."],
     ["Care este programul?", "Localul este deschis zilnic între 11:00 și 22:30, iar programul de livrare este 11:00–22:30. Ne găsești pe str. Independenței 50, Chișinău."],
@@ -67,7 +68,7 @@ const faqs = {
   ru: [
     ["Что есть в меню Daily Kebab?", "В меню представлены кебабы, бургеры, комбо-меню, хот-доги, закуски, салаты, соусы и напитки. Актуальные блюда и цены указаны на странице меню."],
     ["Есть ли вегетарианские или постные блюда?", "Да. Можно выбрать Daily Falafel Kebab, постный Daily Kebab и наборы с ними, а также греческий салат."],
-    ["В какие районы вы доставляете?", "Мы доставляем на Ботанику, в Центр и Телецентр, а также в Кодру, Бэчой, Бык, Сынжеру и Бубуечь. Стоимость зависит от выбранной зоны."],
+    ["В какие районы вы доставляете?", "Мы доставляем на Ботанику, в Центр и Телецентр, а также в Кодру, Бэчой, Сынжеру и Бубуечь. Стоимость зависит от выбранной зоны."],
     ["Какая минимальная сумма заказа и когда доставка бесплатная?", "Минимальная сумма заказа для доставки — 130 MDL. Доставка по городу бесплатная при заказе от 500 MDL, самовывоз всегда бесплатный."],
     ["Как оформить и оплатить заказ?", "Добавьте блюда в корзину и оформите заказ онлайн или позвоните по номеру +373 79 199 299. Онлайн-заказ принимается после подтверждения по телефону. Курьеру можно оплатить наличными или картой."],
     ["Какой у вас график работы?", "Ресторан открыт ежедневно с 11:00 до 22:30, доставка работает с 11:00 до 22:30. Наш адрес: ул. Индепенденцей, 50, Кишинёв."],
@@ -100,8 +101,10 @@ export default function Home() {
   const { language } = useLanguage();
   const { items: cartItems, add } = useCart();
   const menuCategories = useMenuCategories();
+  useViewItemTracking(menuCategories);
   const t = content[language];
   const products = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, item] as const)));
+  const productCategories = new Map(menuCategories.flatMap((category) => category.items.map((item) => [item.id, category.name.ro] as const)));
   const items = featuredProducts.flatMap((featured) => {
     const product = products.get(featured.id);
     return product ? [{ ...featured, product }] : [];
@@ -131,7 +134,7 @@ export default function Home() {
         <div className={styles.sectionIntro} data-reveal="up"><div><span className={styles.kicker}>{t.favoritesKicker}</span><h2>{t.favoritesTitle}</h2></div><p>{t.favoritesText}</p></div>
         <div className={styles.menuGrid}>{items.map(({ product, type, color }, index) => {
           const quantity = cartItems.find((cartItem) => cartItem.id === product.id)?.quantity ?? 0;
-          return <article className={styles.menuCard} key={product.id} data-reveal="up" data-reveal-delay={String(index + 1)}><div className={`${styles.cardVisual} ${styles[color]}`}><span>{product.tag?.[language] ?? product.name[language]}</span>{product.image ? <FeaturedImage image={product.image} alt={product.name[language]} /> : <FoodArtwork type={type} language={language} />}</div><div className={styles.cardInfo}><div><h3>{product.name[language]}</h3><p>{product.description[language]}</p></div><strong>{product.price} MDL</strong></div><button className={styles.addButton} type="button" onClick={() => add({ id: product.id, nameRo: product.name.ro, nameRu: product.name.ru, price: product.price })}>{quantity ? `${t.added} · ${quantity}` : t.addToCart}<span>+</span></button></article>;
+          return <article className={styles.menuCard} key={product.id} data-ecommerce-product-id={product.id} data-reveal="up" data-reveal-delay={String(index + 1)}><div className={`${styles.cardVisual} ${styles[color]}`}><span>{product.tag?.[language] ?? product.name[language]}</span>{product.image ? <FeaturedImage image={product.image} alt={product.name[language]} /> : <FoodArtwork type={type} language={language} />}</div><div className={styles.cardInfo}><div><h3>{product.name[language]}</h3><p>{product.description[language]}</p></div><strong>{product.price} MDL</strong></div><button className={styles.addButton} type="button" onClick={() => add({ id: product.id, nameRo: product.name.ro, nameRu: product.name.ru, price: product.price, itemCategory: productCategories.get(product.id) })}>{quantity ? `${t.added} · ${quantity}` : t.addToCart}<span>+</span></button></article>;
         })}</div>
         <a className={styles.textLink} href="/menu">{t.fullMenu} <ArrowIcon /></a>
       </section>

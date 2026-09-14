@@ -87,7 +87,7 @@ const restaurantJsonLd = {
     addressLocality: siteConfig.address.city,
     addressCountry: siteConfig.address.country,
   },
-  areaServed: ["Chișinău", "Botanica", "Centru", "Telecentru", "Codru", "Băcioi", "Bîc", "Sîngera", "Bubuieci"],
+  areaServed: ["Chișinău", "Botanica", "Centru", "Telecentru", "Codru", "Băcioi", "Sîngera", "Bubuieci"],
   openingHoursSpecification: [{
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
