@@ -29,12 +29,19 @@ declare global {
 }
 
 const trackedPurchasesKey = "daily-tracked-purchases";
+const consentKey = "daily-cookie-consent";
 
 function pushEcommerce(event: string, ecommerce: Record<string, unknown>) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") return false;
+  try {
+    if (window.localStorage.getItem(consentKey) !== "accepted") return false;
+  } catch {
+    return false;
+  }
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ ecommerce: null });
   window.dataLayer.push({ event, ecommerce });
+  return true;
 }
 
 export function cartItemToEcommerce(item: CartItem): EcommerceItem {
@@ -57,7 +64,7 @@ export function trackAddToCart(item: CartItem, quantity = 1) {
 }
 
 export function trackBeginCheckout(items: CartItem[]) {
-  pushEcommerce("begin_checkout", {
+  return pushEcommerce("begin_checkout", {
     currency: "MDL",
     value: items.reduce((total, item) => total + item.price * item.quantity, 0),
     items: items.map(cartItemToEcommerce),
@@ -72,7 +79,7 @@ export function trackPurchaseOnce(purchase: PurchaseData) {
     if (Array.isArray(stored)) tracked = stored.filter((id): id is string => typeof id === "string");
   } catch {}
   if (tracked.includes(purchase.transaction_id)) return;
-  pushEcommerce("purchase", purchase);
+  if (!pushEcommerce("purchase", purchase)) return;
   try {
     window.localStorage.setItem(trackedPurchasesKey, JSON.stringify([...tracked, purchase.transaction_id].slice(-100)));
   } catch {}
@@ -89,19 +96,33 @@ export function useViewItemTracking(categories: MenuCategory[]) {
       price: item.price,
       quantity: 1,
     }] as const)));
+    const trackElement = (element: HTMLElement) => {
+      const id = element.dataset.ecommerceProductId;
+      const item = id ? products.get(id) : undefined;
+      if (!id || !item || seen.current.has(id)) return false;
+      if (!pushEcommerce("view_item", { currency: "MDL", value: item.price, items: [item] })) return false;
+      seen.current.add(id);
+      return true;
+    };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const id = (entry.target as HTMLElement).dataset.ecommerceProductId;
-        const item = id ? products.get(id) : undefined;
-        if (!id || !item || seen.current.has(id)) return;
-        seen.current.add(id);
-        pushEcommerce("view_item", { currency: "MDL", value: item.price, items: [item] });
-        observer.unobserve(entry.target);
+        if (entry.isIntersecting && trackElement(entry.target as HTMLElement)) observer.unobserve(entry.target);
       });
     }, { threshold: 0.5 });
+    const elements = document.querySelectorAll<HTMLElement>("[data-ecommerce-product-id]");
+    const handleConsent = () => {
+      elements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        if (visibleHeight >= Math.min(rect.height, window.innerHeight) * 0.5 && trackElement(element)) observer.unobserve(element);
+      });
+    };
 
-    document.querySelectorAll<HTMLElement>("[data-ecommerce-product-id]").forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+    elements.forEach((element) => observer.observe(element));
+    window.addEventListener("daily-cookie-consent-change", handleConsent);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("daily-cookie-consent-change", handleConsent);
+    };
   }, [categories]);
 }

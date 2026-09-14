@@ -87,9 +87,13 @@ export default function CheckoutPage() {
   const deliveryMinimumMissing = requiresAddress ? Math.max(0, 130 - totalPrice) : 0;
 
   useEffect(() => {
-    if (!items.length || checkoutTracked.current) return;
-    checkoutTracked.current = true;
-    trackBeginCheckout(items);
+    const track = () => {
+      if (!items.length || checkoutTracked.current) return;
+      if (trackBeginCheckout(items)) checkoutTracked.current = true;
+    };
+    track();
+    window.addEventListener("daily-cookie-consent-change", track);
+    return () => window.removeEventListener("daily-cookie-consent-change", track);
   }, [items]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import CartProvider from "./CartProvider";
+import CookieConsent from "./CookieConsent";
 import FloatingPhone from "./FloatingPhone";
 import LanguageProvider from "./LanguageProvider";
 import QuickOrderBar from "./QuickOrderBar";
@@ -104,12 +105,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ro" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
-        <Script id="google-tag-manager" strategy="beforeInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KFXN8FF');`}
+        <Script id="cookie-consent-default" strategy="beforeInteractive">
+          {`(function(w,d,l,i,k){w[l]=w[l]||[];w.gtag=w.gtag||function(){w[l].push(arguments)};var granted=false;try{granted=w.localStorage.getItem(k)==='accepted'}catch(e){}w.gtag('consent','default',{ad_storage:granted?'granted':'denied',analytics_storage:granted?'granted':'denied',ad_user_data:granted?'granted':'denied',ad_personalization:granted?'granted':'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});w.loadDailyGtm=w.loadDailyGtm||function(){if(d.getElementById('daily-gtm'))return;w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName('script')[0],j=d.createElement('script'),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.id='daily-gtm';j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)};if(granted)w.loadDailyGtm()})(window,document,'dataLayer','GTM-KFXN8FF','daily-cookie-consent');`}
         </Script>
       </head>
       <body>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KFXN8FF" height="0" width="0" style={{ display: "none", visibility: "hidden" }} title="Google Tag Manager" /></noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd).replace(/</g, "\\u003c") }}
@@ -119,6 +119,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
             <FloatingPhone />
             <QuickOrderBar />
+            <CookieConsent />
           </CartProvider>
         </LanguageProvider>
       </body>

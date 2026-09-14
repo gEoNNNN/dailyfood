@@ -35,7 +35,7 @@ export default function PrivacyPage() {
       <section className={styles.hero}>
         <span>LEGAL · CONFIDENȚIALITATE</span>
         <h1>Politica de<br /><em>confidențialitate.</em></h1>
-        <p>Ultima actualizare: 8 septembrie 2026</p>
+        <p>Ultima actualizare: 14 septembrie 2026</p>
       </section>
 
       <div className={styles.legalNotice} role="note">
@@ -98,6 +98,7 @@ export default function PrivacyPage() {
               <li>personalului autorizat al restaurantului și curierului care execută comanda;</li>
               <li>furnizorului de hosting, în măsura necesară operării și securizării site-ului;</li>
               <li>Telegram, deoarece detaliile comenzii sunt transmise prin Telegram Bot API către contul administrativ al restaurantului;</li>
+              <li>Google și Meta, numai după consimțământ, dacă instrumentele lor de analiză sau publicitate sunt activate prin Google Tag Manager;</li>
               <li>autorităților publice, atunci când există o obligație legală.</li>
             </ul>
             <p>Utilizarea Telegram poate implica prelucrarea datelor pe infrastructură aflată în alte jurisdicții. Transmitem prin acest serviciu doar informațiile necesare gestionării comenzii, iar accesul la conversația administrativă trebuie limitat la personalul autorizat.</p>
@@ -113,17 +114,20 @@ export default function PrivacyPage() {
           <section id="cookies">
             <span>Secțiunea 06</span>
             <h2>Cookie-uri și stocare locală</h2>
-            <p>În versiunea actuală, site-ul nu setează cookie-uri și nu folosește instrumente de analiză, publicitate sau urmărire. Folosim exclusiv stocarea locală a browserului pentru funcții solicitate de utilizator:</p>
+            <p>Folosim stocare locală esențială pentru funcționarea site-ului. Instrumentele de analiză și publicitate sunt blocate implicit și se încarcă numai dacă alegi „Accept toate” în bannerul de consimțământ.</p>
             <div className={styles.tableWrap}>
               <table>
                 <thead><tr><th>Denumire</th><th>Tehnologie</th><th>Scop</th><th>Furnizor</th><th>Durată</th></tr></thead>
                 <tbody>
                   <tr><td><code>daily-language</code></td><td>localStorage</td><td>Reține limba română sau rusă selectată.</td><td>Daily Kebab Burger</td><td>Până la modificare sau ștergerea datelor browserului.</td></tr>
                   <tr><td><code>daily-shopping-cart</code></td><td>localStorage</td><td>Reține produsele, cantitățile și prețurile din coș.</td><td>Daily Kebab Burger</td><td>Până la golirea coșului, finalizarea comenzii sau ștergerea datelor browserului.</td></tr>
+                  <tr><td><code>daily-cookie-consent</code></td><td>localStorage</td><td>Reține acceptarea sau refuzul tehnologiilor opționale.</td><td>Daily Kebab Burger</td><td>Până la schimbarea opțiunii sau ștergerea datelor browserului.</td></tr>
+                  <tr><td><code>daily-tracked-purchases</code></td><td>localStorage</td><td>Previne raportarea repetată a aceleiași comenzi.</td><td>Daily Kebab Burger</td><td>Ultimele 100 de identificatoare de comandă sau până la ștergerea datelor browserului.</td></tr>
+                  <tr><td>Cookie-uri Google/Meta</td><td>Cookie și tehnologii similare</td><td>Statistici, măsurarea conversiilor și publicitate, dacă serviciile sunt configurate.</td><td>Google / Meta</td><td>Conform politicilor furnizorilor și numai după consimțământ.</td></tr>
                 </tbody>
               </table>
             </div>
-            <p>Aceste elemente nu urmăresc activitatea pe alte site-uri și nu sunt utilizate pentru publicitate. Dacă vom integra în viitor servicii care setează cookie-uri neesențiale, vom actualiza această politică și vom solicita opțiunea utilizatorului înainte de activarea lor, atunci când legea o impune.</p>
+            <p>Poți refuza fără să pierzi accesul la meniu sau posibilitatea de a comanda. Îți poți modifica oricând alegerea folosind butonul „Cookie-uri” afișat pe site. La retragerea consimțământului, instrumentele opționale sunt dezactivate și cookie-urile de analiză cunoscute sunt șterse, în măsura permisă de browser.</p>
           </section>
 
           <section id="retentie">
